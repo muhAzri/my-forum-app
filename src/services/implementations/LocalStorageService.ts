@@ -1,17 +1,17 @@
-import type { IStorageService } from '@/services/interfaces/IStorageService'
+import type { IStorageService } from '@/services/interfaces/IStorageService';
 
 export class LocalStorageService implements IStorageService {
   getItem(key: string): string | null {
     try {
-      return localStorage.getItem(key)
+      return localStorage.getItem(key);
     } catch {
-      return null
+      return null;
     }
   }
 
   setItem(key: string, value: string): void {
     try {
-      localStorage.setItem(key, value)
+      localStorage.setItem(key, value);
     } catch {
       // Silent fail for localStorage save operation
     }
@@ -19,7 +19,7 @@ export class LocalStorageService implements IStorageService {
 
   removeItem(key: string): void {
     try {
-      localStorage.removeItem(key)
+      localStorage.removeItem(key);
     } catch {
       // Silent fail for localStorage remove operation
     }
@@ -27,7 +27,7 @@ export class LocalStorageService implements IStorageService {
 
   clear(): void {
     try {
-      localStorage.clear()
+      localStorage.clear();
     } catch {
       // Silent fail for localStorage clear operation
     }

@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import type { IBaseCard } from '@/components/interfaces/ICard'
+import type { IBaseCard } from '@/components/interfaces/ICard';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface BaseCardProps extends IBaseCard {
   children: ReactNode
@@ -18,5 +18,5 @@ export function BaseCard({ title, description, children, footer }: BaseCardProps
       <CardContent>{children}</CardContent>
       {footer}
     </Card>
-  )
+  );
 }

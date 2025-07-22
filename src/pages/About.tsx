@@ -6,5 +6,5 @@ export default function About() {
         Learn more about our forum community.
       </p>
     </div>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from '@/components/ui/navigation-menu'
+} from '@/components/ui/navigation-menu';
 
 interface NavigationItem {
   to: string
@@ -31,5 +31,5 @@ export function NavigationBar({ items }: NavigationBarProps) {
         ))}
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }

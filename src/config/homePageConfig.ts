@@ -1,4 +1,4 @@
-import type { FeatureCardData, StatsCardData } from '@/types/CardTypes'
+import type { FeatureCardData, StatsCardData } from '@/types/CardTypes';
 
 export const featureCards: FeatureCardData[] = [
   {
@@ -20,7 +20,7 @@ export const featureCards: FeatureCardData[] = [
       // Navigate to topics page
     },
   },
-]
+];
 
 export const statsCard: StatsCardData = {
   title: 'Community Stats',
@@ -30,7 +30,7 @@ export const statsCard: StatsCardData = {
     { label: 'Posts', value: '8,934' },
     { label: 'Topics', value: '456' },
   ],
-}
+};
 
 export const actionButtons = [
   {
@@ -49,4 +49,4 @@ export const actionButtons = [
       // Navigate to categories page
     },
   },
-]
+];

@@ -31,43 +31,153 @@ export default tseslint.config(
       react: {
         version: 'detect',
       },
+      'import/resolver': {
+        typescript: {},
+      },
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      // Airbnb JavaScript rules
+      'semi': ['error', 'always'],
+      'quotes': ['error', 'single'],
+      'indent': ['error', 2],
+      'comma-dangle': ['error', 'always-multiline'],
+      'object-curly-spacing': ['error', 'always'],
+      'array-bracket-spacing': ['error', 'never'],
+      'arrow-spacing': 'error',
+      'block-spacing': 'error',
+      'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+      'comma-spacing': ['error', { before: false, after: true }],
+      'func-call-spacing': ['error', 'never'],
+      'key-spacing': ['error', { beforeColon: false, afterColon: true }],
+      'keyword-spacing': 'error',
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
+      'no-trailing-spaces': 'error',
+      'space-before-blocks': 'error',
+      'space-in-parens': ['error', 'never'],
+      'space-infix-ops': 'error',
+      'spaced-comment': ['error', 'always'],
+      'max-len': ['error', { code: 100, ignoreUrls: true, ignoreComments: false, ignoreRegExpLiterals: true, ignoreStrings: true, ignoreTemplateLiterals: true }],
       
-      // TypeScript strict rules
-      '@typescript-eslint/no-unused-vars': 'error',
+      // Airbnb best practices
+      'prefer-const': 'error',
+      'no-var': 'error',
+      'eqeqeq': ['error', 'always'],
+      'curly': ['error', 'all'],
+      'no-console': 'warn',
+      'no-debugger': 'error',
+      'no-alert': 'error',
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'no-new-wrappers': 'error',
+      'no-throw-literal': 'error',
+      'no-undef-init': 'error',
+      'no-unused-expressions': 'error',
+      'radix': 'error',
+      
+      // Airbnb ES6 rules
+      'arrow-parens': ['error', 'always'],
+      'arrow-body-style': ['error', 'as-needed'],
+      'prefer-arrow-callback': 'error',
+      'prefer-template': 'error',
+      'template-curly-spacing': 'error',
+      'object-shorthand': 'error',
+      'prefer-destructuring': ['error', {
+        array: true,
+        object: true,
+      }, {
+        enforceForRenamedProperties: false,
+      }],
+
+      // TypeScript strict rules (Airbnb-TypeScript style)
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'error',
+      '@typescript-eslint/prefer-optional-chain': 'error',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       
-      // React rules
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
-      'react/jsx-boolean-value': 'error',
-      'react/jsx-curly-brace-presence': ['error', { 'props': 'never', 'children': 'never' }],
-      'react/self-closing-comp': 'error',
-      'react/jsx-sort-props': 'error',
+      // Import rules (Airbnb style)
+      'import/order': ['error', {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      }],
+      'import/no-unresolved': 'error',
+      'import/no-duplicates': 'error',
+      'import/prefer-default-export': 'off', // Modern React doesn't need this
+      'import/extensions': ['error', 'ignorePackages', {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      }],
       
-      // Disable problematic import rules for now
-      'import/order': 'off',
-      'import/no-duplicates': 'off',
+      // React rules (Airbnb React style)
+      'react/react-in-jsx-scope': 'off', // React 17+
+      'react/jsx-uses-react': 'off',     // React 17+
+      'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
+      'react/jsx-props-no-spreading': 'off', // Allow spreading for flexibility
+      'react/jsx-boolean-value': ['error', 'never'],
+      'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
+      'react/jsx-indent': ['error', 2],
+      'react/jsx-indent-props': ['error', 2],
+      'react/jsx-max-props-per-line': ['error', { maximum: 1, when: 'multiline' }],
+      'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
+      'react/jsx-closing-tag-location': 'error',
+      'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
+      'react/jsx-tag-spacing': ['error', {
+        closingSlash: 'never',
+        beforeSelfClosing: 'always',
+        afterOpening: 'never',
+        beforeClosing: 'never',
+      }],
+      'react/jsx-sort-props': ['error', {
+        ignoreCase: true,
+        callbacksLast: false,
+        shorthandFirst: false,
+        shorthandLast: false,
+        noSortAlphabetically: false,
+        reservedFirst: true,
+      }],
+      'react/self-closing-comp': ['error', {
+        component: true,
+        html: true,
+      }],
+      'react/function-component-definition': ['error', {
+        namedComponents: 'function-declaration',
+        unnamedComponents: 'arrow-function',
+      }],
+      'react/prop-types': 'off', // Using TypeScript instead
+      'react/require-default-props': 'off', // TypeScript handles this
+      'react/jsx-no-useless-fragment': 'error',
+      'react/no-array-index-key': 'error',
       
-      // Accessibility rules
+      // React Hooks rules
+      ...reactHooks.configs.recommended.rules,
+      
+      // React Refresh rules
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      
+      // Accessibility rules (Airbnb includes these)
       'jsx-a11y/alt-text': 'error',
       'jsx-a11y/anchor-has-content': 'error',
       'jsx-a11y/anchor-is-valid': 'error',
       'jsx-a11y/click-events-have-key-events': 'error',
-      
-      // General strict rules
-      'no-console': 'warn',
-      'prefer-const': 'error',
-      'no-var': 'error',
-      'eqeqeq': 'error',
-      'curly': 'error',
+      'jsx-a11y/no-static-element-interactions': 'error',
+      'jsx-a11y/role-has-required-aria-props': 'error',
+      'jsx-a11y/role-supports-aria-props': 'error',
     },
   },
-)
+);

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 
 interface AuthButtonProps {
   isAuthenticated: boolean
@@ -12,12 +12,12 @@ export function AuthButton({ isAuthenticated, onSignIn, onSignOut }: AuthButtonP
       <Button onClick={onSignOut} variant="outline">
         Sign Out
       </Button>
-    )
+    );
   }
 
   return (
     <Button onClick={onSignIn} variant="outline">
       Sign In
     </Button>
-  )
+  );
 }

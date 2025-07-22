@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button'
-import { FeatureCard } from '@/components/cards/FeatureCard'
-import { StatsCard } from '@/components/cards/StatsCard'
-import { actionButtons, featureCards, statsCard } from '@/config/homePageConfig'
+import { FeatureCard } from '@/components/cards/FeatureCard';
+import { StatsCard } from '@/components/cards/StatsCard';
+import { Button } from '@/components/ui/button';
+import { actionButtons, featureCards, statsCard } from '@/config/homePageConfig';
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {featureCards.map((cardData) => (
-          <FeatureCard data={cardData} key={cardData.title} />
+          <FeatureCard key={cardData.title} data={cardData} />
         ))}
         <StatsCard data={statsCard} />
       </div>
@@ -23,8 +23,8 @@ export default function Home() {
       <div className="text-center">
         {actionButtons.map((button) => (
           <Button
-            className={button.className}
             key={button.text}
+            className={button.className}
             onClick={button.onClick}
             size={button.size}
             variant={button.variant}
@@ -34,5 +34,5 @@ export default function Home() {
         ))}
       </div>
     </div>
-  )
+  );
 }

@@ -12,4 +12,4 @@ export const navigationItems: NavigationItem[] = [
     to: '/about',
     label: 'About',
   },
-]
+];
