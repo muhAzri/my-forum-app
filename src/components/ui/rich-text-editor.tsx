@@ -45,7 +45,7 @@ export function RichTextEditor({
   disabled = false,
   label,
   error,
-  minHeight = 150,
+  minHeight = 200,
   maxHeight = 400,
   showTips = true,
 }: RichTextEditorProps) {
@@ -98,26 +98,28 @@ export function RichTextEditor({
 
       <div
         className={cn(
-          'border border-gray-300 rounded-md bg-white',
+          'relative border border-gray-300 rounded-md bg-white overflow-visible',
           // Quill toolbar styling
           '[&_.ql-toolbar]:sticky [&_.ql-toolbar]:top-0 [&_.ql-toolbar]:z-50',
           '[&_.ql-toolbar]:bg-white [&_.ql-toolbar]:border-b [&_.ql-toolbar]:border-gray-200',
           '[&_.ql-toolbar]:rounded-t-md',
           // Quill container styling  
           '[&_.ql-container]:border-t-0 [&_.ql-container]:rounded-b-md',
-          // Quill editor styling
+          // Quill editor styling with dynamic height
           '[&_.ql-editor]:overflow-y-auto [&_.ql-editor]:resize-y',
+          `[&_.ql-editor]:min-h-[${minHeight - 42}px]`,
+          `[&_.ql-editor]:max-h-[${maxHeight - 42}px]`,
+          // Blockquote styling
+          '[&_.ql-editor_blockquote]:border-l-4 [&_.ql-editor_blockquote]:border-blue-500',
+          '[&_.ql-editor_blockquote]:bg-blue-50 [&_.ql-editor_blockquote]:p-3',
+          '[&_.ql-editor_blockquote]:my-2 [&_.ql-editor_blockquote]:rounded-r-md',
+          '[&_.ql-editor_blockquote]:italic',
           // Fix modal/tooltip positioning
           '[&_.ql-tooltip]:z-[9999] [&_.ql-tooltip]:relative',
           '[&_.ql-editing]:z-[9999]',
           error && 'border-red-500',
           disabled && 'opacity-60 pointer-events-none',
         )}
-        style={{
-          '--editor-min-height': `${minHeight - 42}px`,
-          '--editor-max-height': `${maxHeight - 42}px`,
-          zIndex: 1,
-        } as unknown as React.CSSProperties & { [key: string]: string }}
       >
         <ReactQuill
           ref={quillRef}
@@ -130,28 +132,6 @@ export function RichTextEditor({
           value={value || ''}
         />
       </div>
-
-      <style>{`
-        .ql-editor {
-          min-height: var(--editor-min-height) !important;
-          max-height: var(--editor-max-height) !important;
-        }
-        
-        .ql-editor blockquote {
-          border-left: 4px solid #3b82f6 !important;
-          background-color: #eff6ff !important;
-          padding: 12px 16px !important;
-          margin: 8px 0 !important;
-          border-radius: 0 6px 6px 0 !important;
-          font-style: italic !important;
-        }
-        
-        /* Ensure container doesn't clip tooltips */
-        .rich-text-editor-container {
-          position: relative !important;
-          overflow: visible !important;
-        }
-      `}</style>
 
       {error && (
         <p className="text-sm text-red-600">{error}</p>
