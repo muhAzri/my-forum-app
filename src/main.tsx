@@ -1,11 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { registerServices } from '../core/ServiceRegistration';
-
-import { App } from './App';
-import '../App.css';
-import '../styles/design-system.css';
+import { App } from '@/App';
+import { registerServices } from '@/core/ServiceRegistration';
+import '@/App.css';
+import '@/styles/design-system.css';
 
 registerServices();
 

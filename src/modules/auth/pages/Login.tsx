@@ -1,5 +1,5 @@
 
-import { LoginForm } from '../modules/auth/components/LoginForm';
+import { LoginForm } from '@/modules/auth/components/LoginForm';
 
 export function Login() {
   return (

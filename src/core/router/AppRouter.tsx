@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { CreateThread } from '../../app/CreateThread';
-import { Home } from '../../app/Home';
-import { Leaderboard } from '../../app/Leaderboard';
-import { Login } from '../../app/Login';
-import { Register } from '../../app/Register';
-import { ThreadDetail } from '../../app/ThreadDetail';
-import { Threads } from '../../app/Threads';
-import { AuthProvider } from '../../modules/auth/components/AuthProvider';
-import { ProtectedRoute } from '../../modules/auth/components/ProtectedRoute';
-import { Layout } from '../../shared/components/layout/Layout';
+import { AuthProvider } from '@/modules/auth/components/AuthProvider';
+import { ProtectedRoute } from '@/modules/auth/components/ProtectedRoute';
+import { Login } from '@/modules/auth/pages/Login';
+import { Register } from '@/modules/auth/pages/Register';
+import { Leaderboard } from '@/modules/leaderboard/pages/Leaderboard';
+import { CreateThread } from '@/modules/threads/pages/CreateThread';
+import { Home } from '@/modules/threads/pages/Home';
+import { ThreadDetail } from '@/modules/threads/pages/ThreadDetail';
+import { Threads } from '@/modules/threads/pages/Threads';
+import { Layout } from '@/shared/components/layout/Layout';
 
 export function AppRouter() {
   return (
