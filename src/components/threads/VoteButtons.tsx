@@ -52,7 +52,7 @@ export function VoteButtons({
       <div className="flex items-center space-x-2">
         <div className="flex items-center space-x-2">
           <Button
-            className="text-gray-400 hover:text-gray-600"
+            className="text-muted-foreground hover:text-foreground"
             onClick={() => {
               // Could show a tooltip or navigate to login
             }}
@@ -64,15 +64,15 @@ export function VoteButtons({
           </Button>
           
           <span className={`text-sm font-medium ${
-            voteCount > 0 ? 'text-green-600' :
-              voteCount < 0 ? 'text-red-600' : 'text-gray-600'
+            voteCount > 0 ? 'text-success' :
+              voteCount < 0 ? 'text-error' : 'text-foreground'
           }`}
           >
             {voteCount > 0 ? `+${voteCount}` : voteCount}
           </span>
 
           <Button
-            className="text-gray-400 hover:text-gray-600"
+            className="text-muted-foreground hover:text-foreground"
             onClick={() => {
               // Could show a tooltip or navigate to login
             }}
@@ -84,12 +84,12 @@ export function VoteButtons({
           </Button>
         </div>
         
-        <div className="text-xs text-gray-500">
-          <Link className="text-blue-600 hover:text-blue-700 underline" to="/login">
+        <div className="text-xs text-muted-foreground">
+          <Link className="text-primary hover:text-primary underline" to="/login">
             Login
           </Link>
           {' or '}
-          <Link className="text-blue-600 hover:text-blue-700 underline" to="/register">
+          <Link className="text-primary hover:text-primary underline" to="/register">
             Register
           </Link>
           {' to vote'}
@@ -101,7 +101,7 @@ export function VoteButtons({
   return (
     <div className="flex items-center space-x-2">
       <Button
-        className={currentVote === 'up' ? 'text-green-600' : 'text-gray-500'}
+        className={currentVote === 'up' ? 'text-success hover:text-success' : 'text-muted-foreground hover:text-foreground'}
         onClick={() => handleVote('up')}
         size="sm"
         variant="ghost"
@@ -110,15 +110,15 @@ export function VoteButtons({
       </Button>
 
       <span className={`text-sm font-medium ${
-        voteCount > 0 ? 'text-green-600' :
-          voteCount < 0 ? 'text-red-600' : 'text-gray-600'
+        voteCount > 0 ? 'text-success' :
+          voteCount < 0 ? 'text-error' : 'text-foreground'
       }`}
       >
         {voteCount > 0 ? `+${voteCount}` : voteCount}
       </span>
 
       <Button
-        className={currentVote === 'down' ? 'text-red-600' : 'text-gray-500'}
+        className={currentVote === 'down' ? 'text-error hover:text-error' : 'text-muted-foreground hover:text-foreground'}
         onClick={() => handleVote('down')}
         size="sm"
         variant="ghost"

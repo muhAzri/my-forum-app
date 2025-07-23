@@ -91,17 +91,17 @@ export function RichTextEditor({
   return (
     <div className={cn('space-y-2', className)}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-foreground">
           {label}
         </label>
       )}
 
       <div
         className={cn(
-          'relative border border-gray-300 rounded-md bg-white overflow-visible',
+          'relative border border-input rounded-md bg-background overflow-visible',
           // Quill toolbar styling
           '[&_.ql-toolbar]:sticky [&_.ql-toolbar]:top-0 [&_.ql-toolbar]:z-50',
-          '[&_.ql-toolbar]:bg-white [&_.ql-toolbar]:border-b [&_.ql-toolbar]:border-gray-200',
+          '[&_.ql-toolbar]:bg-background [&_.ql-toolbar]:border-b [&_.ql-toolbar]:border-border',
           '[&_.ql-toolbar]:rounded-t-md',
           // Quill container styling  
           '[&_.ql-container]:border-t-0 [&_.ql-container]:rounded-b-md',
@@ -110,14 +110,14 @@ export function RichTextEditor({
           `[&_.ql-editor]:min-h-[${minHeight - 42}px]`,
           `[&_.ql-editor]:max-h-[${maxHeight - 42}px]`,
           // Blockquote styling
-          '[&_.ql-editor_blockquote]:border-l-4 [&_.ql-editor_blockquote]:border-blue-500',
-          '[&_.ql-editor_blockquote]:bg-blue-50 [&_.ql-editor_blockquote]:p-3',
+          '[&_.ql-editor_blockquote]:border-l-4 [&_.ql-editor_blockquote]:border-primary',
+          '[&_.ql-editor_blockquote]:bg-primary/5 [&_.ql-editor_blockquote]:p-3',
           '[&_.ql-editor_blockquote]:my-2 [&_.ql-editor_blockquote]:rounded-r-md',
           '[&_.ql-editor_blockquote]:italic',
           // Fix modal/tooltip positioning
           '[&_.ql-tooltip]:z-[9999] [&_.ql-tooltip]:relative',
           '[&_.ql-editing]:z-[9999]',
-          error && 'border-red-500',
+          error && 'border-destructive',
           disabled && 'opacity-60 pointer-events-none',
         )}
       >
@@ -134,15 +134,15 @@ export function RichTextEditor({
       </div>
 
       {error && (
-        <p className="text-sm text-red-600">{error}</p>
+        <p className="text-sm text-destructive">{error}</p>
       )}
 
       {showTips && (
-        <div className="text-xs text-gray-500 space-y-1">
+        <div className="text-xs text-muted-foreground space-y-1">
           <div>
             Tip: Use the toolbar for formatting - headers, **bold**, *italic*, and blockquotes
           </div>
-          <div className="text-gray-400">
+          <div className="text-muted-foreground opacity-75">
             Content is automatically sanitized for security
           </div>
         </div>

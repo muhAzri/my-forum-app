@@ -33,7 +33,7 @@ export function ThreadDetail() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center">
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-destructive mb-4">{error}</p>
         </div>
       </div>
     );
@@ -43,7 +43,7 @@ export function ThreadDetail() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center">
-          <p className="text-gray-600">Thread not found.</p>
+          <p className="text-muted-foreground">Thread not found.</p>
         </div>
       </div>
     );
@@ -57,18 +57,18 @@ export function ThreadDetail() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+      <div className="bg-card rounded-lg shadow-sm border border-border p-8">
         <div className="flex items-center space-x-2 mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary text-secondary-foreground">
             {capitalizeCategory(currentThread.category)}
           </span>
-          <div className="flex items-center text-sm text-gray-500">
+          <div className="flex items-center text-sm text-muted-foreground">
             <Calendar className="w-4 h-4 mr-1" />
             {formatTimeAgo(currentThread.createdAt)}
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+        <h1 className="text-3xl font-bold text-card-foreground mb-6">
           {currentThread.title}
         </h1>
 
@@ -80,24 +80,24 @@ export function ThreadDetail() {
               src={currentThread.owner.avatar}
             />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-              <User className="w-5 h-5 text-gray-500" />
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <User className="w-5 h-5 text-muted-foreground" />
             </div>
           )}
           <div>
-            <p className="font-medium text-gray-900">{currentThread.owner.name}</p>
-            <p className="text-sm text-gray-500">Thread Author</p>
+            <p className="font-medium text-card-foreground">{currentThread.owner.name}</p>
+            <p className="text-sm text-muted-foreground">Thread Author</p>
           </div>
         </div>
 
         <div className="mb-8">
           <SafeHtml
-            className="text-gray-700"
+            className="text-card-foreground"
             html={currentThread.body}
           />
         </div>
 
-        <div className="flex items-center justify-between py-4 border-t border-gray-200">
+        <div className="flex items-center justify-between py-4 border-t border-border">
           <VoteButtons
             currentVote={userVote}
             itemId={currentThread.id}
@@ -105,7 +105,7 @@ export function ThreadDetail() {
             voteCount={voteScore}
           />
 
-          <div className="flex items-center space-x-4 text-sm text-gray-500">
+          <div className="flex items-center space-x-4 text-sm text-muted-foreground">
             <div className="flex items-center space-x-1">
               <ThumbsUp className="w-4 h-4" />
               <span>{currentThread.upVotesBy.length}</span>

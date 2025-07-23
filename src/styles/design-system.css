@@ -43,6 +43,54 @@
   --color-warning-500: #f59e0b;
   --color-warning-600: #d97706;
 
+  /* Semantic Colors for UI Components */
+  --color-background: #ffffff;
+  --color-foreground: var(--color-gray-900);
+  
+  --color-card: #ffffff;
+  --color-card-foreground: var(--color-gray-900);
+  
+  --color-popover: #ffffff;
+  --color-popover-foreground: var(--color-gray-900);
+  
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--color-gray-100);
+  --color-secondary-foreground: var(--color-gray-900);
+  
+  --color-muted: var(--color-gray-100);
+  --color-muted-foreground: var(--color-gray-500);
+  
+  --color-accent: var(--color-gray-100);
+  --color-accent-foreground: var(--color-gray-900);
+  
+  --color-destructive: var(--color-error-600);
+  --color-destructive-foreground: #ffffff;
+  
+  --color-border: var(--color-gray-200);
+  --color-input: var(--color-gray-200);
+  --color-ring: var(--color-primary-600);
+
+  /* Toast Colors */
+  --color-success-background: var(--color-success-50);
+  --color-success-border: var(--color-success-100);
+  --color-success-text: var(--color-success-700);
+  --color-success-icon: var(--color-success-600);
+
+  --color-error-background: var(--color-error-50);
+  --color-error-border: var(--color-error-100);
+  --color-error-text: var(--color-error-700);
+  --color-error-icon: var(--color-error-600);
+
+  --color-warning-background: var(--color-warning-50);
+  --color-warning-border: var(--color-warning-100);
+  --color-warning-text: var(--color-warning-600);
+  --color-warning-icon: var(--color-warning-600);
+
+  --color-info-background: var(--color-primary-50);
+  --color-info-border: var(--color-primary-100);
+  --color-info-text: var(--color-primary-700);
+  --color-info-icon: var(--color-primary-600);
+
   /* Typography */
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-mono: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
@@ -142,6 +190,8 @@ body {
 
 /* Color Classes */
 .text-primary { color: var(--color-primary-600); }
+.text-primary-foreground { color: var(--color-primary-foreground); }
+.text-gray-400 { color: var(--color-gray-400); }
 .text-gray-500 { color: var(--color-gray-500); }
 .text-gray-600 { color: var(--color-gray-600); }
 .text-gray-700 { color: var(--color-gray-700); }
@@ -150,11 +200,55 @@ body {
 .text-error { color: var(--color-error-600); }
 .text-warning { color: var(--color-warning-600); }
 
+.text-foreground { color: var(--color-foreground); }
+.text-card-foreground { color: var(--color-card-foreground); }
+.text-muted-foreground { color: var(--color-muted-foreground); }
+.text-accent-foreground { color: var(--color-accent-foreground); }
+.text-destructive { color: var(--color-destructive); }
+.text-destructive-foreground { color: var(--color-destructive-foreground); }
+
+.bg-background { background-color: var(--color-background); }
+.bg-card { background-color: var(--color-card); }
+.bg-popover { background-color: var(--color-popover); }
 .bg-primary { background-color: var(--color-primary-600); }
 .bg-primary-hover:hover { background-color: var(--color-primary-700); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-muted { background-color: var(--color-muted); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-destructive { background-color: var(--color-destructive); }
 .bg-white { background-color: white; }
 .bg-gray-50 { background-color: var(--color-gray-50); }
 .bg-gray-100 { background-color: var(--color-gray-100); }
+
+.border-border { border-color: var(--color-border); }
+.border-input { border-color: var(--color-input); }
+
+/* Toast Classes */
+.toast-success { 
+  background-color: var(--color-success-background); 
+  border-color: var(--color-success-border); 
+  color: var(--color-success-text); 
+}
+.toast-error { 
+  background-color: var(--color-error-background); 
+  border-color: var(--color-error-border); 
+  color: var(--color-error-text); 
+}
+.toast-warning { 
+  background-color: var(--color-warning-background); 
+  border-color: var(--color-warning-border); 
+  color: var(--color-warning-text); 
+}
+.toast-info { 
+  background-color: var(--color-info-background); 
+  border-color: var(--color-info-border); 
+  color: var(--color-info-text); 
+}
+
+.toast-icon-success { color: var(--color-success-icon); }
+.toast-icon-error { color: var(--color-error-icon); }
+.toast-icon-warning { color: var(--color-warning-icon); }
+.toast-icon-info { color: var(--color-info-icon); }
 
 /* Utility Classes */
 .rounded-sm { border-radius: var(--radius-sm); }

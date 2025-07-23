@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { sanitizeHtml } from '../../lib/sanitize';
 import { cn } from '../../lib/utils';
@@ -21,15 +21,15 @@ export function SafeHtml({ html, className }: SafeHtmlProps) {
         className={cn(
           'prose prose-sm max-w-none',
           // Typography styles - match Quill editor exactly
-          'prose-headings:text-gray-900 prose-headings:font-semibold',
-          'prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-3',
+          'prose-headings:text-foreground prose-headings:font-semibold',
+          'prose-p:text-foreground prose-p:leading-relaxed prose-p:mb-3',
           // Text formatting
-          'prose-strong:text-gray-900 prose-strong:font-semibold',
-          'prose-em:text-gray-700 prose-em:italic',
-          '[&_b]:text-gray-900 [&_b]:font-semibold',
-          '[&_i]:text-gray-700 [&_i]:italic',
-          '[&_u]:underline [&_u]:text-gray-700',
-          '[&_s]:line-through [&_s]:text-gray-600',
+          'prose-strong:text-foreground prose-strong:font-semibold',
+          'prose-em:text-foreground prose-em:italic',
+          '[&_b]:text-foreground [&_b]:font-semibold',
+          '[&_i]:text-foreground [&_i]:italic',
+          '[&_u]:underline [&_u]:text-foreground',
+          '[&_s]:line-through [&_s]:text-muted-foreground',
           // Spacing
           '[&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
           // Custom class for specific styling
@@ -42,8 +42,8 @@ export function SafeHtml({ html, className }: SafeHtmlProps) {
       {/* Match Quill editor styling exactly */}
       <style>{`
         .safe-html-content blockquote {
-          border-left: 4px solid #3b82f6 !important;
-          background-color: #eff6ff !important;
+          border-left: 4px solid var(--color-primary-600) !important;
+          background-color: var(--color-primary-50) !important;
           padding: 12px 16px !important;
           margin: 8px 0 !important;
           border-radius: 0 6px 6px 0 !important;

@@ -14,14 +14,14 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
   const voteScore = thread.upVotesBy.length - thread.downVotesBy.length;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow animate-fade-in-up">
+    <div className="bg-card rounded-lg shadow-sm border border-border p-6 hover:shadow-md transition-shadow animate-fade-in-up">
       <div className="flex justify-between items-start">
         <div className="flex-1">
           <div className="flex items-baseline space-x-2 mb-2">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground">
               {capitalizeCategory(thread.category)}
             </span>
-            <div className="flex items-center text-sm text-gray-500">
+            <div className="flex items-center text-sm text-muted-foreground">
               <Calendar className="w-4 h-4 mr-1" />
               {formatTimeAgo(thread.createdAt)}
             </div>
@@ -31,11 +31,11 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
             className="block group"
             to={`/threads/${thread.id}`}
           >
-            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+            <h3 className="text-lg font-semibold text-card-foreground group-hover:text-primary transition-colors">
               {thread.title}
             </h3>
             {thread.body && (
-              <p className="mt-2 text-gray-600 line-clamp-3">
+              <p className="mt-2 text-muted-foreground line-clamp-3">
                 {createExcerpt(thread.body, 150)}
               </p>
             )}
@@ -50,14 +50,14 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
                   src={author.avatar}
                 />
               ) : (
-                <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
-                  <User className="w-3 h-3 text-gray-500" />
+                <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center">
+                  <User className="w-3 h-3 text-muted-foreground" />
                 </div>
               )}
-              <span className="text-sm text-gray-600">{author?.name ?? 'Unknown User'}</span>
+              <span className="text-sm text-muted-foreground">{author?.name ?? 'Unknown User'}</span>
             </div>
 
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
+            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center space-x-1">
                 <ThumbsUp className="w-4 h-4" />
                 <span>{thread.upVotesBy.length}</span>
@@ -75,10 +75,10 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
         </div>
 
         <div className="ml-4 flex flex-col items-center">
-          <div className={`text-lg font-semibold ${voteScore > 0 ? 'text-green-600' : voteScore < 0 ? 'text-red-600' : 'text-gray-600'}`}>
+          <div className={`text-lg font-semibold ${voteScore > 0 ? 'text-success' : voteScore < 0 ? 'text-error' : 'text-muted-foreground'}`}>
             {voteScore > 0 ? '+' : ''}{voteScore}
           </div>
-          <div className="text-xs text-gray-500">votes</div>
+          <div className="text-xs text-muted-foreground">votes</div>
         </div>
       </div>
     </div>
