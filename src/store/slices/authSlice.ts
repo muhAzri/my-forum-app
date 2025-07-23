@@ -52,16 +52,11 @@ export const registerUser = createAsyncThunk(
 
 export const fetchCurrentUser = createAsyncThunk(
   'auth/fetchCurrentUser',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { getState }) => {
     const { auth } = getState() as { auth: AuthState };
 
     if (!auth.token) {
-      return rejectWithValue('No token available');
-    }
-
-    // Prevent duplicate requests if already loading or user exists
-    if (auth.isLoading || auth.user) {
-      return rejectWithValue('Request already in progress or user already loaded');
+      throw new Error('No token available');
     }
 
     const response = await fetch('https://forum-api.dicoding.dev/v1/users/me', {

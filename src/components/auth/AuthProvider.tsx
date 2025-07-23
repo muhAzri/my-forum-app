@@ -10,17 +10,17 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const { token, isInitialized, user, isLoading } = useSelector((state: RootState) => state.auth);
+  const { token, isInitialized } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const initializeAuth = async () => {
-      if (token && !user && !isLoading) {
+      if (token) {
         try {
           await dispatch(fetchCurrentUser()).unwrap();
         } catch {
           // Error is handled in the slice
         }
-      } else if (!token) {
+      } else {
         // No token, mark as initialized
         dispatch(setInitialized());
       }
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (!isInitialized) {
       initializeAuth();
     }
-  }, [dispatch, token, isInitialized, user, isLoading]);
+  }, [dispatch, token, isInitialized]);
 
   return children;
 }

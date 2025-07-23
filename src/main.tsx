@@ -11,11 +11,7 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-  process.env['NODE_ENV'] === 'development' ? (
-    <StrictMode>
-      <App />
-    </StrictMode>
-  ) : (
+  <StrictMode>
     <App />
-  ),
+  </StrictMode>,
 );

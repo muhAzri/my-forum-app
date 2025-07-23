@@ -15,14 +15,7 @@ const initialState: ThreadsState = {
 
 export const fetchThreads = createAsyncThunk(
   'threads/fetchThreads',
-  async (_, { getState, rejectWithValue }) => {
-    const { threads } = getState() as { threads: ThreadsState };
-
-    // Prevent duplicate requests if already loading or threads already loaded
-    if (threads.isLoading || (threads.threads.length > 0 && !threads.error)) {
-      return rejectWithValue('Request already in progress or threads already loaded');
-    }
-
+  async () => {
     const response = await fetch('https://forum-api.dicoding.dev/v1/threads');
 
     if (!response.ok) {
@@ -36,14 +29,7 @@ export const fetchThreads = createAsyncThunk(
 
 export const fetchThreadDetail = createAsyncThunk(
   'threads/fetchThreadDetail',
-  async (threadId: string, { getState, rejectWithValue }) => {
-    const { threads } = getState() as { threads: ThreadsState };
-
-    // Prevent duplicate requests if already loading or same thread already loaded
-    if (threads.isLoading || (threads.currentThread?.id === threadId)) {
-      return rejectWithValue('Request already in progress or thread already loaded');
-    }
-
+  async (threadId: string) => {
     const response = await fetch(`https://forum-api.dicoding.dev/v1/threads/${threadId}`);
 
     if (!response.ok) {
