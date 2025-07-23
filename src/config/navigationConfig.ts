@@ -1,6 +1,6 @@
 export interface NavigationItem {
-  to: string
-  label: string
+  to: string;
+  label: string;
 }
 
 export const navigationItems: NavigationItem[] = [
@@ -9,7 +9,7 @@ export const navigationItems: NavigationItem[] = [
     label: 'Home',
   },
   {
-    to: '/about',
-    label: 'About',
+    to: '/leaderboard',
+    label: 'Leaderboard',
   },
 ];

@@ -5,15 +5,15 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from '@/components/ui/navigation-menu';
+} from '../ui/navigation-menu';
 
 interface NavigationItem {
-  to: string
-  label: string
+  to: string;
+  label: string;
 }
 
 interface NavigationBarProps {
-  items: NavigationItem[]
+  items: NavigationItem[];
 }
 
 export function NavigationBar({ items }: NavigationBarProps) {
@@ -22,11 +22,14 @@ export function NavigationBar({ items }: NavigationBarProps) {
       <NavigationMenuList>
         {items.map((item) => (
           <NavigationMenuItem key={item.to}>
-            <Link to={item.to}>
-              <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+            <NavigationMenuLink asChild>
+              <Link
+                className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                to={item.to}
+              >
                 {item.label}
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
