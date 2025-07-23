@@ -45,8 +45,6 @@ export function RichTextEditor({
   disabled = false,
   label,
   error,
-  minHeight = 200,
-  maxHeight = 400,
   showTips = true,
 }: RichTextEditorProps) {
   const quillRef = useRef<ReactQuill>(null);
@@ -105,10 +103,10 @@ export function RichTextEditor({
           '[&_.ql-toolbar]:rounded-t-md',
           // Quill container styling  
           '[&_.ql-container]:border-t-0 [&_.ql-container]:rounded-b-md',
-          // Quill editor styling with dynamic height
+          // Quill editor styling with proper Tailwind height classes
           '[&_.ql-editor]:overflow-y-auto [&_.ql-editor]:resize-y',
-          `[&_.ql-editor]:min-h-[${minHeight - 42}px]`,
-          `[&_.ql-editor]:max-h-[${maxHeight - 42}px]`,
+          '[&_.ql-editor]:min-h-64', // 256px (300px - 44px toolbar height)
+          '[&_.ql-editor]:max-h-96', // 384px (456px - 44px toolbar height)
           // Blockquote styling
           '[&_.ql-editor_blockquote]:border-l-4 [&_.ql-editor_blockquote]:border-primary',
           '[&_.ql-editor_blockquote]:bg-primary/5 [&_.ql-editor_blockquote]:p-3',
