@@ -2,7 +2,7 @@ import { MessageCircle, ThumbsUp, ThumbsDown, User, Calendar } from 'lucide-reac
 import { Link } from 'react-router-dom';
 
 import { createExcerpt } from '../../lib/sanitize';
-import { formatTimeAgo } from '../../lib/utils';
+import { formatTimeAgo, capitalizeCategory } from '../../lib/utils';
 import type { Thread } from '../../types/forum';
 
 interface ThreadCardProps {
@@ -17,9 +17,9 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow animate-fade-in-up">
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <div className="flex items-center space-x-2 mb-2">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
-              {thread.category}
+          <div className="flex items-baseline space-x-2 mb-2">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              {capitalizeCategory(thread.category)}
             </span>
             <div className="flex items-center text-sm text-gray-500">
               <Calendar className="w-4 h-4 mr-1" />

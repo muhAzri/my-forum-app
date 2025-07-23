@@ -1,9 +1,9 @@
 import { Calendar, MessageCircle, ThumbsDown, ThumbsUp, User } from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import { formatTimeAgo } from '../../lib/utils';
+import { formatTimeAgo, capitalizeCategory } from '../../lib/utils';
 import type { AppDispatch, RootState } from '../../store';
 import { fetchThreadDetail } from '../../store/slices/threadsSlice';
 import { SafeHtml } from '../ui/safe-html';
@@ -59,8 +59,8 @@ export function ThreadDetail() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
         <div className="flex items-center space-x-2 mb-4">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
-            {currentThread.category}
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            {capitalizeCategory(currentThread.category)}
           </span>
           <div className="flex items-center text-sm text-gray-500">
             <Calendar className="w-4 h-4 mr-1" />
@@ -127,9 +127,36 @@ export function ThreadDetail() {
           Comments ({currentThread.comments.length})
         </h2>
 
-        {user && (
+        {user ? (
           <div className="mb-8">
             <CreateCommentForm threadId={currentThread.id} />
+          </div>
+        ) : (
+          <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-lg text-center">
+            <div className="flex items-center justify-center mb-4">
+              <MessageCircle className="w-8 h-8 text-gray-400" />
+            </div>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              Join the conversation!
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Share your thoughts and engage with the community by adding a comment.
+            </p>
+            <div className="flex items-center justify-center space-x-4">
+              <Link
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                to="/login"
+              >
+                Login to Comment
+              </Link>
+              <span className="text-gray-500">or</span>
+              <Link
+                className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                to="/register"
+              >
+                Create Account
+              </Link>
+            </div>
           </div>
         )}
 

@@ -42,11 +42,14 @@ export function CreateCommentForm({ threadId }: CreateCommentFormProps) {
         disabled={isCreating}
         error={error}
         label="Add a comment"
+        maxHeight={300}
+        minHeight={120}
         onChange={(value) => {
           setContent(value);
           if (error) { setError(''); }
         }}
         placeholder="Write your comment here... Use the toolbar for formatting."
+        showTips={false}
         value={content}
       />
 

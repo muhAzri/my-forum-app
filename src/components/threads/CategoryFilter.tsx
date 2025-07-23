@@ -1,5 +1,6 @@
 import { Filter } from 'lucide-react';
 
+import { capitalizeCategory } from '../../lib/utils';
 import { Select, type SelectOption } from '../ui/select';
 
 interface CategoryFilterProps {
@@ -17,7 +18,7 @@ export function CategoryFilter({
     { value: 'all', label: 'All Categories' },
     ...categories.map((category) => ({
       value: category,
-      label: category,
+      label: capitalizeCategory(category),
     })),
   ];
 

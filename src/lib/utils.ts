@@ -36,3 +36,8 @@ export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) { return text; }
   return `${text.slice(0, maxLength)}...`;
 }
+
+export function capitalizeCategory(category: string): string {
+  if (!category) { return ''; }
+  return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+}

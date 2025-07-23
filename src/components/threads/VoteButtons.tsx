@@ -1,5 +1,6 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import type { AppDispatch, RootState } from '../../store';
 import { voteThread, voteComment } from '../../store/slices/threadsSlice';
@@ -49,13 +50,50 @@ export function VoteButtons({
   if (!user) {
     return (
       <div className="flex items-center space-x-2">
-        <div className="flex items-center space-x-1 text-gray-400">
-          <ThumbsUp className="w-4 h-4" />
-          <ThumbsDown className="w-4 h-4" />
+        <div className="flex items-center space-x-2">
+          <Button
+            className="text-gray-400 hover:text-gray-600"
+            onClick={() => {
+              // Could show a tooltip or navigate to login
+            }}
+            size="sm"
+            title="Login to vote"
+            variant="ghost"
+          >
+            <ThumbsUp className="w-4 h-4" />
+          </Button>
+          
+          <span className={`text-sm font-medium ${
+            voteCount > 0 ? 'text-green-600' :
+              voteCount < 0 ? 'text-red-600' : 'text-gray-600'
+          }`}
+          >
+            {voteCount > 0 ? `+${voteCount}` : voteCount}
+          </span>
+
+          <Button
+            className="text-gray-400 hover:text-gray-600"
+            onClick={() => {
+              // Could show a tooltip or navigate to login
+            }}
+            size="sm"
+            title="Login to vote"
+            variant="ghost"
+          >
+            <ThumbsDown className="w-4 h-4" />
+          </Button>
         </div>
-        <span className="text-sm text-gray-500">
-          {voteCount > 0 ? `+${voteCount}` : voteCount}
-        </span>
+        
+        <div className="text-xs text-gray-500">
+          <Link className="text-blue-600 hover:text-blue-700 underline" to="/login">
+            Login
+          </Link>
+          {' or '}
+          <Link className="text-blue-600 hover:text-blue-700 underline" to="/register">
+            Register
+          </Link>
+          {' to vote'}
+        </div>
       </div>
     );
   }

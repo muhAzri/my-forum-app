@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { stripHtml } from '../../lib/sanitize';
+import { capitalizeCategory } from '../../lib/utils';
 import type { AppDispatch, RootState } from '../../store';
 import { createThread } from '../../store/slices/threadsSlice';
 import { Button } from '../ui/button';
@@ -111,7 +112,7 @@ export function CreateThreadForm() {
               <option value="">Select a category</option>
               {categories.map((category) => (
                 <option key={category} value={category}>
-                  {category}
+                  {capitalizeCategory(category)}
                 </option>
               ))}
               <option value="General">General</option>
@@ -129,6 +130,8 @@ export function CreateThreadForm() {
             disabled={isCreating}
             error={formErrors['body']}
             label="Content"
+            maxHeight={500}
+            minHeight={200}
             onChange={(value) => {
               setFormData((prev) => ({ ...prev, body: value }));
               if (formErrors['body']) {

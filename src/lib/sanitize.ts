@@ -1,17 +1,20 @@
 import DOMPurify from 'dompurify';
 
-// Configure DOMPurify with safe defaults
+// Unified HTML sanitization config used across all components
+// This ensures consistency between rich text editor and display components
+export const ALLOWED_HTML_TAGS = [
+  'div', 'p', 'br', 'span', 'strong', 'em', 'b', 'i', 'u', 's',
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'ul', 'ol', 'li',
+  'blockquote',
+];
+
+export const ALLOWED_HTML_ATTRIBUTES = [];
+
+// Configure DOMPurify with safe defaults - matches rich text editor allowed tags
 const sanitizeConfig = {
-  ALLOWED_TAGS: [
-    'div', 'p', 'br', 'span', 'strong', 'em', 'b', 'i', 'u',
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'ul', 'ol', 'li',
-    'blockquote', 'code', 'pre',
-    'a',
-  ],
-  ALLOWED_ATTR: [
-    'href', 'target', 'rel',
-  ],
+  ALLOWED_TAGS: ALLOWED_HTML_TAGS,
+  ALLOWED_ATTR: ALLOWED_HTML_ATTRIBUTES,
   ALLOW_DATA_ATTR: false,
   FORBID_TAGS: ['script', 'object', 'embed', 'iframe', 'form', 'input'],
   FORBID_ATTR: ['style', 'onclick', 'onerror', 'onload', 'onmouseover'],
