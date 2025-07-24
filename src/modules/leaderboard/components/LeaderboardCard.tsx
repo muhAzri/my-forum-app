@@ -1,5 +1,3 @@
-import React from 'react';
-
 import RankIndicator from '../../../shared/components/molecules/RankIndicator';
 import ScoreDisplay from '../../../shared/components/molecules/ScoreDisplay';
 import UserProfile from '../../../shared/components/molecules/UserProfile';
@@ -11,7 +9,7 @@ interface LeaderboardCardProps {
   rank: number;
 }
 
-const LeaderboardCard: React.FC<LeaderboardCardProps> = ({ entry, rank }) => {
+function LeaderboardCard({ entry, rank }: LeaderboardCardProps) {
   const getRankBg = () => {
     if (rank === 1) { return 'bg-yellow-50 border-yellow-200'; }
     if (rank === 2) { return 'bg-gray-50 border-gray-200'; }
@@ -41,6 +39,6 @@ const LeaderboardCard: React.FC<LeaderboardCardProps> = ({ entry, rank }) => {
       </div>
     </div>
   );
-};
+}
 
 export default LeaderboardCard;

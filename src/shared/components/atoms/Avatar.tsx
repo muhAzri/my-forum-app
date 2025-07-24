@@ -10,13 +10,13 @@ export interface AvatarProps {
   className?: string | undefined;
 }
 
-const Avatar: React.FC<AvatarProps> = ({
+function Avatar({
   src,
   alt,
   size = 'md',
   fallback,
   className,
-}) => {
+}: AvatarProps) {
   const sizeClasses = {
     xs: 'h-6 w-6',
     sm: 'h-8 w-8',
@@ -59,6 +59,6 @@ const Avatar: React.FC<AvatarProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default Avatar;

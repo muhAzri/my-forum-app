@@ -10,12 +10,12 @@ interface ScoreDisplayProps {
   className?: string;
 }
 
-const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
+function ScoreDisplay({
   score,
   label = 'points',
   size = 'md',
   className,
-}) => {
+}: ScoreDisplayProps) {
   const scoreTextSizes = {
     sm: 'text-lg',
     md: 'text-2xl',
@@ -42,6 +42,6 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
       </Text>
     </div>
   );
-};
+}
 
 export default ScoreDisplay;

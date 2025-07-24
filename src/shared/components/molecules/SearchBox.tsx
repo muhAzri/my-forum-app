@@ -14,13 +14,13 @@ export interface SearchBoxProps {
   className?: string;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({
+function SearchBox({
   placeholder = 'Search...',
   value: controlledValue,
   onSearch,
   onClear,
   className,
-}) => {
+}: SearchBoxProps) {
   const [internalValue, setInternalValue] = useState('');
   const value = controlledValue ?? internalValue;
 
@@ -71,6 +71,6 @@ const SearchBox: React.FC<SearchBoxProps> = ({
       </div>
     </form>
   );
-};
+}
 
 export default SearchBox;

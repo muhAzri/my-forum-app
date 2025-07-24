@@ -11,7 +11,7 @@ interface RankIndicatorProps {
   className?: string;
 }
 
-const RankIndicator: React.FC<RankIndicatorProps> = ({ rank, size = 'md', className }) => {
+function RankIndicator({ rank, size = 'md', className }: RankIndicatorProps) {
   const sizeClasses = {
     sm: 'w-4 h-4',
     md: 'w-6 h-6',
@@ -44,6 +44,6 @@ const RankIndicator: React.FC<RankIndicatorProps> = ({ rank, size = 'md', classN
       {getRankIcon()}
     </div>
   );
-};
+}
 
 export default RankIndicator;

@@ -9,12 +9,12 @@ export interface BadgeProps {
   className?: string;
 }
 
-const Badge: React.FC<BadgeProps> = ({
+function Badge({
   children,
   variant = 'default',
   size = 'md',
   className,
-}) => {
+}: BadgeProps) {
   const variantClasses = {
     default: 'bg-gray-100 text-gray-800 border-gray-200',
     success: 'bg-success-100 text-success-800 border-success-200',
@@ -40,6 +40,6 @@ const Badge: React.FC<BadgeProps> = ({
       {children}
     </span>
   );
-};
+}
 
 export default Badge;

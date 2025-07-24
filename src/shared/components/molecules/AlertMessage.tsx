@@ -14,13 +14,13 @@ export interface AlertMessageProps {
   className?: string;
 }
 
-const AlertMessage: React.FC<AlertMessageProps> = ({
+function AlertMessage({
   children,
   variant = 'info',
   dismissible = false,
   onDismiss,
   className,
-}) => {
+}: AlertMessageProps) {
   const variants = {
     info: {
       container: 'bg-blue-50 border-blue-200 text-blue-800',
@@ -83,6 +83,6 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default AlertMessage;

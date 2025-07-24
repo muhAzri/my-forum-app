@@ -13,31 +13,33 @@ export interface CommentHeaderProps {
   className?: string;
 }
 
-const CommentHeader: React.FC<CommentHeaderProps> = ({
+function CommentHeader({
   username,
   avatarUrl,
   createdAt,
   className,
-}) => (
-  <div className={cn('flex items-center gap-3', className)}>
-    <Avatar
-      alt={`${username}'s avatar`}
-      fallback={username.charAt(0).toUpperCase()}
-      size="sm"
-      src={avatarUrl}
-    />
-    <div className="flex flex-col">
-      <Text variant="body" weight="medium">
-        {username}
-      </Text>
-      <div className="flex items-center gap-1">
-        <Icon className="text-muted-foreground" icon={Calendar} size="xs" />
-        <Text variant="muted">
-          {new Date(createdAt).toLocaleDateString()}
+}: CommentHeaderProps) {
+  return (
+    <div className={cn('flex items-center gap-3', className)}>
+      <Avatar
+        alt={`${username}'s avatar`}
+        fallback={username.charAt(0).toUpperCase()}
+        size="sm"
+        src={avatarUrl}
+      />
+      <div className="flex flex-col">
+        <Text variant="body" weight="medium">
+          {username}
         </Text>
+        <div className="flex items-center gap-1">
+          <Icon className="text-muted-foreground" icon={Calendar} size="xs" />
+          <Text variant="muted">
+            {new Date(createdAt).toLocaleDateString()}
+          </Text>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+}
 
 export default CommentHeader;

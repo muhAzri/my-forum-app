@@ -6,15 +6,17 @@ interface SkeletonProps {
   className?: string;
 }
 
-const Skeleton: React.FC<SkeletonProps> = ({ className }) => (
-  <div
-    aria-label="Loading"
-    className={cn(
-      'animate-shimmer rounded-md bg-gray-200',
-      className,
-    )}
-    role="status"
-  />
-);
+function Skeleton({ className }: SkeletonProps) {
+  return (
+    <div
+      aria-label="Loading"
+      className={cn(
+        'animate-shimmer rounded-md bg-gray-200',
+        className,
+      )}
+      role="status"
+    />
+  );
+}
 
 export default Skeleton;

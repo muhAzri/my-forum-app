@@ -7,16 +7,18 @@ export interface DividerProps {
   className?: string;
 }
 
-const Divider: React.FC<DividerProps> = ({ orientation = 'horizontal', className }) => (
-  <div
-    aria-orientation={orientation}
-    className={cn(
-      'bg-border',
-      orientation === 'horizontal' ? 'h-px w-full' : 'w-px h-full',
-      className,
-    )}
-    role="separator"
-  />
-);
+function Divider({ orientation = 'horizontal', className }: DividerProps) {
+  return (
+    <div
+      aria-orientation={orientation}
+      className={cn(
+        'bg-border',
+        orientation === 'horizontal' ? 'h-px w-full' : 'w-px h-full',
+        className,
+      )}
+      role="separator"
+    />
+  );
+}
 
 export default Divider;

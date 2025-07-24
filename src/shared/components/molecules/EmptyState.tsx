@@ -20,46 +20,48 @@ interface EmptyStateProps {
   className?: string;
 }
 
-const EmptyState: React.FC<EmptyStateProps> = ({
+function EmptyState({
   icon,
   title,
   message,
   actionButton,
   className,
-}) => (
-  <div className={cn('text-center py-12', className)}>
-    {icon && (
-      <div className="flex justify-center mb-4">
-        <div className="rounded-full bg-gray-100 p-4">
-          <Icon className="text-gray-400" icon={icon} size="xl" />
+}: EmptyStateProps) {
+  return (
+    <div className={cn('text-center py-12', className)}>
+      {icon && (
+        <div className="flex justify-center mb-4">
+          <div className="rounded-full bg-gray-100 p-4">
+            <Icon className="text-gray-400" icon={icon} size="xl" />
+          </div>
         </div>
-      </div>
-    )}
+      )}
 
-    <Heading className="text-gray-900 mb-2" level={3}>
-      {title}
-    </Heading>
+      <Heading className="text-gray-900 mb-2" level={3}>
+        {title}
+      </Heading>
 
-    <Text className="text-gray-600 mb-6 max-w-sm mx-auto" variant="body">
-      {message}
-    </Text>
+      <Text className="text-gray-600 mb-6 max-w-sm mx-auto" variant="body">
+        {message}
+      </Text>
 
-    {actionButton && (
-      <Button
-        asChild={!!actionButton.href}
-        onClick={actionButton.onClick}
-        variant={actionButton.variant ?? 'default'}
-      >
-        {actionButton.href ? (
-          <a href={actionButton.href}>
-            {actionButton.label}
-          </a>
-        ) : (
-          actionButton.label
-        )}
-      </Button>
-    )}
-  </div>
-);
+      {actionButton && (
+        <Button
+          asChild={!!actionButton.href}
+          onClick={actionButton.onClick}
+          variant={actionButton.variant ?? 'default'}
+        >
+          {actionButton.href ? (
+            <a href={actionButton.href}>
+              {actionButton.label}
+            </a>
+          ) : (
+            actionButton.label
+          )}
+        </Button>
+      )}
+    </div>
+  );
+}
 
 export default EmptyState;

@@ -17,12 +17,12 @@ interface CommentCardProps {
   className?: string;
 }
 
-const CommentCard: React.FC<CommentCardProps> = ({
+function CommentCard({
   comment,
   threadId,
   VoteButtons,
   className,
-}) => {
+}: CommentCardProps) {
   const { user } = useSelector((state: RootState) => state.auth);
 
   const voteScore = comment.upVotesBy.length - comment.downVotesBy.length;
@@ -75,6 +75,6 @@ const CommentCard: React.FC<CommentCardProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default CommentCard;

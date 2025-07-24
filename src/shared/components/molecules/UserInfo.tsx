@@ -13,14 +13,14 @@ export interface UserInfoProps {
   className?: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({
+function UserInfo({
   username,
   avatarUrl,
   createdAt,
   showDate = true,
   size = 'md',
   className,
-}) => {
+}: UserInfoProps) {
   const containerClasses = {
     sm: 'space-x-2',
     md: 'space-x-3',
@@ -53,6 +53,6 @@ const UserInfo: React.FC<UserInfoProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default UserInfo;

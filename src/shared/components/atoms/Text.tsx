@@ -10,13 +10,13 @@ export interface TextProps {
   as?: React.ElementType;
 }
 
-const Text: React.FC<TextProps> = ({
+function Text({
   children,
   variant = 'body',
   weight = 'normal',
   className,
   as: Component = 'p',
-}) => {
+}: TextProps) {
   const variantClasses = {
     body: 'text-base text-foreground',
     small: 'text-sm text-foreground',
@@ -42,6 +42,6 @@ const Text: React.FC<TextProps> = ({
       {children}
     </Component>
   );
-};
+}
 
 export default Text;

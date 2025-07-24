@@ -18,26 +18,28 @@ interface NavigationBarProps {
   items: NavigationItem[];
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ items }) => (
-  <NavigationMenu>
-    <NavigationMenuList>
-      {items.map((item) => (
-        <NavigationMenuItem key={item.to}>
-          <NavigationMenuLink asChild>
-            <Link
-              className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-              to={item.to}
-              underline="none"
-            >
-              <Text variant="small" weight="medium">
-                {item.label}
-              </Text>
-            </Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-      ))}
-    </NavigationMenuList>
-  </NavigationMenu>
-);
+function NavigationBar({ items }: NavigationBarProps) {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        {items.map((item) => (
+          <NavigationMenuItem key={item.to}>
+            <NavigationMenuLink asChild>
+              <Link
+                className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                to={item.to}
+                underline="none"
+              >
+                <Text variant="small" weight="medium">
+                  {item.label}
+                </Text>
+              </Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+}
 
 export default NavigationBar;

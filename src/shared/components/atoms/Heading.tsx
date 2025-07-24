@@ -9,12 +9,12 @@ export interface HeadingProps {
   className?: string;
 }
 
-const Heading: React.FC<HeadingProps> = ({
+function Heading({
   children,
   level = 1,
   weight = 'bold',
   className,
-}) => {
+}: HeadingProps) {
   const Component = `h${level}` as React.ElementType;
 
   const levelClasses = {
@@ -45,6 +45,6 @@ const Heading: React.FC<HeadingProps> = ({
       {children}
     </Component>
   );
-};
+}
 
 export default Heading;

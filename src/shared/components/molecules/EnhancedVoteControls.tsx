@@ -20,7 +20,7 @@ interface EnhancedVoteControlsProps {
   className?: string;
 }
 
-const EnhancedVoteControls: React.FC<EnhancedVoteControlsProps> = ({
+function EnhancedVoteControls({
   itemType,
   itemId,
   commentId,
@@ -30,7 +30,7 @@ const EnhancedVoteControls: React.FC<EnhancedVoteControlsProps> = ({
   orientation = 'horizontal',
   size = 'md',
   className,
-}) => {
+}: EnhancedVoteControlsProps) {
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -99,6 +99,6 @@ const EnhancedVoteControls: React.FC<EnhancedVoteControlsProps> = ({
       userVote={userVote}
     />
   );
-};
+}
 
 export default EnhancedVoteControls;

@@ -17,40 +17,42 @@ interface PageHeaderProps {
   className?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({
+function PageHeader({
   title,
   subtitle,
   actionButton,
   className,
-}) => (
-  <div className={cn('flex items-center justify-between mb-8', className)}>
-    <div>
-      <Heading className="mb-2" level={1}>
-        {title}
-      </Heading>
-      {subtitle && (
-        <Text className="text-muted-foreground" variant="body">
-          {subtitle}
-        </Text>
+}: PageHeaderProps) {
+  return (
+    <div className={cn('flex items-center justify-between mb-8', className)}>
+      <div>
+        <Heading className="mb-2" level={1}>
+          {title}
+        </Heading>
+        {subtitle && (
+          <Text className="text-muted-foreground" variant="body">
+            {subtitle}
+          </Text>
+        )}
+      </div>
+
+      {actionButton && (
+        <Button
+          asChild={!!actionButton.href}
+          onClick={actionButton.onClick}
+          variant={actionButton.variant ?? 'default'}
+        >
+          {actionButton.href ? (
+            <a href={actionButton.href}>
+              {actionButton.label}
+            </a>
+          ) : (
+            actionButton.label
+          )}
+        </Button>
       )}
     </div>
-
-    {actionButton && (
-      <Button
-        asChild={!!actionButton.href}
-        onClick={actionButton.onClick}
-        variant={actionButton.variant ?? 'default'}
-      >
-        {actionButton.href ? (
-          <a href={actionButton.href}>
-            {actionButton.label}
-          </a>
-        ) : (
-          actionButton.label
-        )}
-      </Button>
-    )}
-  </div>
-);
+  );
+}
 
 export default PageHeader;

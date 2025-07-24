@@ -9,7 +9,7 @@ export interface IconProps {
   className?: string;
 }
 
-const Icon: React.FC<IconProps> = ({ icon: IconComponent, size = 'md', className }) => {
+function Icon({ icon: IconComponent, size = 'md', className }: IconProps) {
   const sizeClasses = {
     xs: 'h-3 w-3',
     sm: 'h-4 w-4',
@@ -27,6 +27,6 @@ const Icon: React.FC<IconProps> = ({ icon: IconComponent, size = 'md', className
       )}
     />
   );
-};
+}
 
 export default Icon;

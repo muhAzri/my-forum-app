@@ -9,14 +9,14 @@ export interface LinkProps extends React.ComponentProps<typeof RouterLink> {
   external?: boolean;
 }
 
-const Link: React.FC<LinkProps> = ({
+function Link({
   children,
   className,
   variant = 'default',
   underline = 'hover',
   external,
   ...props
-}) => {
+}: LinkProps) {
   const variantClasses = {
     default: 'text-primary-600 hover:text-primary-700',
     muted: 'text-muted-foreground hover:text-foreground',
@@ -54,6 +54,6 @@ const Link: React.FC<LinkProps> = ({
       {children}
     </RouterLink>
   );
-};
+}
 
 export default Link;

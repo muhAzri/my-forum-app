@@ -13,35 +13,37 @@ export interface ThreadMetaProps {
   className?: string;
 }
 
-const ThreadMeta: React.FC<ThreadMetaProps> = ({
+function ThreadMeta({
   category,
   createdAt,
   commentCount,
   className,
-}) => (
-  <div className={cn('flex items-center gap-3', className)}>
-    {category && (
-      <Badge size="sm" variant="info">
-        {category}
-      </Badge>
-    )}
+}: ThreadMetaProps) {
+  return (
+    <div className={cn('flex items-center gap-3', className)}>
+      {category && (
+        <Badge size="sm" variant="info">
+          {category}
+        </Badge>
+      )}
 
-    <div className="flex items-center gap-1">
-      <Icon className="text-muted-foreground" icon={Calendar} size="xs" />
-      <Text variant="muted">
-        {new Date(createdAt).toLocaleDateString()}
-      </Text>
-    </div>
-
-    {commentCount !== undefined && (
       <div className="flex items-center gap-1">
-        <Icon className="text-muted-foreground" icon={MessageSquare} size="xs" />
+        <Icon className="text-muted-foreground" icon={Calendar} size="xs" />
         <Text variant="muted">
-          {commentCount} {commentCount === 1 ? 'comment' : 'comments'}
+          {new Date(createdAt).toLocaleDateString()}
         </Text>
       </div>
-    )}
-  </div>
-);
+
+      {commentCount !== undefined && (
+        <div className="flex items-center gap-1">
+          <Icon className="text-muted-foreground" icon={MessageSquare} size="xs" />
+          <Text variant="muted">
+            {commentCount} {commentCount === 1 ? 'comment' : 'comments'}
+          </Text>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default ThreadMeta;

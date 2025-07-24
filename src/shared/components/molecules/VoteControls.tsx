@@ -18,7 +18,7 @@ export interface VoteControlsProps {
   className?: string | undefined;
 }
 
-const VoteControls: React.FC<VoteControlsProps> = ({
+function VoteControls({
   upVotes,
   downVotes,
   userVote,
@@ -28,7 +28,7 @@ const VoteControls: React.FC<VoteControlsProps> = ({
   orientation = 'vertical',
   size = 'md',
   className,
-}) => {
+}: VoteControlsProps) {
   const totalScore = upVotes - downVotes;
 
   const containerClasses = {
@@ -78,6 +78,6 @@ const VoteControls: React.FC<VoteControlsProps> = ({
       </Button>
     </div>
   );
-};
+}
 
 export default VoteControls;
