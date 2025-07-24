@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
 
 import { AppRouter } from '@/core/router/AppRouter';
-import { store } from '@/core/store';
-import type { AppDispatch } from '@/core/store';
+import { store, type AppDispatch } from '@/core/store';
 import { fetchCurrentUser, setInitialized } from '@/core/store/slices/authSlice';
 
 function AppContent() {

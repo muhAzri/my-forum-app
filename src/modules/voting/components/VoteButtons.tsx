@@ -47,10 +47,15 @@ export function VoteButtons({
             <ThumbsUp className="w-4 h-4" />
           </Button>
 
-          <span className={`text-sm font-medium ${
-            voteState.score > 0 ? 'text-success' :
-              voteState.score < 0 ? 'text-error' : 'text-foreground'
-          }`}
+          <span className={`text-sm font-medium ${(() => {
+            if (voteState.score > 0) {
+              return 'text-success';
+            }
+            if (voteState.score < 0) {
+              return 'text-error';
+            }
+            return 'text-foreground';
+          })()}`}
           >
             {voteState.score > 0 ? `+${voteState.score}` : voteState.score}
           </span>
@@ -92,10 +97,15 @@ export function VoteButtons({
         <ThumbsUp className="w-4 h-4" />
       </Button>
 
-      <span className={`text-sm font-medium ${
-        voteState.score > 0 ? 'text-success' :
-          voteState.score < 0 ? 'text-error' : 'text-foreground'
-      }`}
+      <span className={`text-sm font-medium ${(() => {
+        if (voteState.score > 0) {
+          return 'text-success';
+        }
+        if (voteState.score < 0) {
+          return 'text-error';
+        }
+        return 'text-foreground';
+      })()}`}
       >
         {voteState.score > 0 ? `+${voteState.score}` : voteState.score}
       </span>

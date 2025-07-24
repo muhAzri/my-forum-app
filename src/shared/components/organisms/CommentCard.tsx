@@ -32,10 +32,14 @@ function CommentCard({
   const { user } = useSelector((state: RootState) => state.auth);
 
   const voteScore = comment.upVotesBy.length - comment.downVotesBy.length;
-  const userVote = user ? (
-    comment.upVotesBy.includes(user.id) ? 'up' :
-      comment.downVotesBy.includes(user.id) ? 'down' : null
-  ) : null;
+  let userVote: 'up' | 'down' | null = null;
+  if (user) {
+    if (comment.upVotesBy.includes(user.id)) {
+      userVote = 'up';
+    } else if (comment.downVotesBy.includes(user.id)) {
+      userVote = 'down';
+    }
+  }
 
   return (
     <div className={cn('bg-white rounded-lg border border-gray-200 p-6', className)}>

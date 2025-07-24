@@ -75,7 +75,17 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
         </div>
 
         <div className="ml-4 flex flex-col items-center">
-          <div className={`text-lg font-semibold ${voteScore > 0 ? 'text-success' : voteScore < 0 ? 'text-error' : 'text-muted-foreground'}`}>
+          <div
+            className={`text-lg font-semibold ${(() => {
+              if (voteScore > 0) {
+                return 'text-success';
+              }
+              if (voteScore < 0) {
+                return 'text-error';
+              }
+              return 'text-muted-foreground';
+            })()}`}
+          >
             {voteScore > 0 ? '+' : ''}{voteScore}
           </div>
           <div className="text-xs text-muted-foreground">votes</div>

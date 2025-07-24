@@ -1,16 +1,17 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import react from 'eslint-plugin-react'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import importPlugin from 'eslint-plugin-import'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import react from 'eslint-plugin-react';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import importPlugin from 'eslint-plugin-import';
+import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default [
   { ignores: ['dist'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -18,6 +19,9 @@ export default tseslint.config(
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
     plugins: {
@@ -36,7 +40,7 @@ export default tseslint.config(
       },
     },
     rules: {
-      // Airbnb JavaScript rules
+      // Airbnb JavaScript Style Guide Rules
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
       'indent': ['error', 2],
@@ -56,9 +60,16 @@ export default tseslint.config(
       'space-in-parens': ['error', 'never'],
       'space-infix-ops': 'error',
       'spaced-comment': ['error', 'always'],
-      'max-len': ['error', { code: 100, ignoreUrls: true, ignoreComments: false, ignoreRegExpLiterals: true, ignoreStrings: true, ignoreTemplateLiterals: true }],
+      'max-len': ['error', { 
+        code: 100, 
+        ignoreUrls: true, 
+        ignoreComments: false, 
+        ignoreRegExpLiterals: true, 
+        ignoreStrings: true, 
+        ignoreTemplateLiterals: true 
+      }],
       
-      // Airbnb best practices
+      // Airbnb Best Practices
       'prefer-const': 'error',
       'no-var': 'error',
       'eqeqeq': ['error', 'always'],
@@ -73,8 +84,19 @@ export default tseslint.config(
       'no-undef-init': 'error',
       'no-unused-expressions': 'error',
       'radix': 'error',
+      'no-underscore-dangle': 'error',
+      'no-param-reassign': ['error', { 
+        props: true,
+        ignorePropertyModificationsFor: ['state'], // Allow Redux Toolkit state mutations
+      }],
+      'no-return-assign': ['error', 'always'],
+      'no-sequences': 'error',
+      'no-unneeded-ternary': 'error',
+      'no-nested-ternary': 'error',
+      'no-plusplus': 'error',
+      'yoda': 'error',
       
-      // Airbnb ES6 rules
+      // Airbnb ES6 Rules
       'arrow-parens': ['error', 'always'],
       'arrow-body-style': ['error', 'as-needed'],
       'prefer-arrow-callback': 'error',
@@ -87,8 +109,11 @@ export default tseslint.config(
       }, {
         enforceForRenamedProperties: false,
       }],
-
-      // TypeScript strict rules (Airbnb-TypeScript style)
+      'prefer-spread': 'error',
+      'prefer-rest-params': 'error',
+      'no-duplicate-imports': 'error',
+      
+      // TypeScript overrides for Airbnb rules
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',
@@ -97,8 +122,12 @@ export default tseslint.config(
       '@typescript-eslint/prefer-nullish-coalescing': 'error',
       '@typescript-eslint/prefer-optional-chain': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+      '@typescript-eslint/no-shadow': 'error',
+      'no-shadow': 'off', // Turn off base rule as it can report incorrect errors
+      '@typescript-eslint/no-use-before-define': ['error', { functions: true, classes: true, variables: true }],
+      'no-use-before-define': 'off', // Turn off base rule as it can report incorrect errors
       
-      // Import rules (Airbnb style)
+      // Airbnb Import Rules
       'import/order': ['error', {
         groups: [
           'builtin',
@@ -114,17 +143,20 @@ export default tseslint.config(
           caseInsensitive: true,
         },
       }],
-      'import/no-unresolved': 'error',
-      'import/no-duplicates': 'error',
-      'import/prefer-default-export': 'off', // Modern React doesn't need this
       'import/extensions': ['error', 'ignorePackages', {
         js: 'never',
         jsx: 'never',
         ts: 'never',
         tsx: 'never',
       }],
+      'import/no-unresolved': 'error',
+      'import/prefer-default-export': 'off', // Modern React doesn't need this
+      'import/no-duplicates': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-named-as-default': 'error',
+      'import/no-named-as-default-member': 'error',
       
-      // React rules (Airbnb React style)
+      // React Rules (Airbnb React Style)
       'react/react-in-jsx-scope': 'off', // React 17+
       'react/jsx-uses-react': 'off',     // React 17+
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
@@ -143,14 +175,6 @@ export default tseslint.config(
         afterOpening: 'never',
         beforeClosing: 'never',
       }],
-      'react/jsx-sort-props': ['error', {
-        ignoreCase: true,
-        callbacksLast: false,
-        shorthandFirst: false,
-        shorthandLast: false,
-        noSortAlphabetically: false,
-        reservedFirst: true,
-      }],
       'react/self-closing-comp': ['error', {
         component: true,
         html: true,
@@ -163,14 +187,21 @@ export default tseslint.config(
       'react/require-default-props': 'off', // TypeScript handles this
       'react/jsx-no-useless-fragment': 'error',
       'react/no-array-index-key': 'error',
+      'react/jsx-key': 'error',
+      'react/no-danger': 'error',
+      'react/no-deprecated': 'error',
+      'react/no-direct-mutation-state': 'error',
+      'react/jsx-pascal-case': 'error',
+      'react/jsx-no-duplicate-props': 'error',
+      'react/jsx-no-undef': 'error',
       
-      // React Hooks rules
+      // React Hooks Rules
       ...reactHooks.configs.recommended.rules,
       
-      // React Refresh rules
+      // React Refresh Rules
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       
-      // Accessibility rules (Airbnb includes these)
+      // Accessibility Rules (Airbnb includes these)
       'jsx-a11y/alt-text': 'error',
       'jsx-a11y/anchor-has-content': 'error',
       'jsx-a11y/anchor-is-valid': 'error',
@@ -178,6 +209,11 @@ export default tseslint.config(
       'jsx-a11y/no-static-element-interactions': 'error',
       'jsx-a11y/role-has-required-aria-props': 'error',
       'jsx-a11y/role-supports-aria-props': 'error',
+      'jsx-a11y/img-redundant-alt': 'error',
+      'jsx-a11y/no-access-key': 'error',
+      'jsx-a11y/no-autofocus': ['error', { ignoreNonDOM: true }],
+      'jsx-a11y/no-distracting-elements': 'error',
+      'jsx-a11y/no-redundant-roles': 'error',
     },
   },
-);
+];

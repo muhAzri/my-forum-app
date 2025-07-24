@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Input from '../atoms/Input';
-import type { InputProps } from '../atoms/Input';
+import Input, { type InputProps } from '../atoms/Input';
 import Label from '../atoms/Label';
 import Text from '../atoms/Text';
 

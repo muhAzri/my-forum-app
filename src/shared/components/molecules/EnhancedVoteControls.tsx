@@ -62,7 +62,7 @@ function EnhancedVoteControls({
           threadId: itemId,
           voteType: finalVoteType,
         })).unwrap();
-      } catch (error) {
+      } catch {
         // Rollback on error
         dispatch(rollbackVoteThread({
           threadId: itemId,
@@ -84,7 +84,7 @@ function EnhancedVoteControls({
           commentId,
           voteType: finalVoteType,
         })).unwrap();
-      } catch (error) {
+      } catch {
         // Rollback on error
         dispatch(rollbackVoteComment({
           commentId,
@@ -126,7 +126,12 @@ function EnhancedVoteControls({
     );
   }
 
-  const userVote = currentVote === 'up' ? 1 : currentVote === 'down' ? -1 : null;
+  let userVote: number | null = null;
+  if (currentVote === 'up') {
+    userVote = 1;
+  } else if (currentVote === 'down') {
+    userVote = -1;
+  }
 
   return (
     <VoteControls

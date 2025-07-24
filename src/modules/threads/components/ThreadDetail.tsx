@@ -50,10 +50,14 @@ export function ThreadDetail() {
   }
 
   const voteScore = currentThread.upVotesBy.length - currentThread.downVotesBy.length;
-  const userVote = user ? (
-    currentThread.upVotesBy.includes(user.id) ? 'up' :
-      currentThread.downVotesBy.includes(user.id) ? 'down' : null
-  ) : null;
+  let userVote: 'up' | 'down' | null = null;
+  if (user) {
+    if (currentThread.upVotesBy.includes(user.id)) {
+      userVote = 'up';
+    } else if (currentThread.downVotesBy.includes(user.id)) {
+      userVote = 'down';
+    }
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">

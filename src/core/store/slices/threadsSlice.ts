@@ -226,7 +226,14 @@ const threadsSlice = createSlice({
         }
       }
     },
-    rollbackVoteThread: (state, action: PayloadAction<{ threadId: string; previousUpVotes: string[]; previousDownVotes: string[] }>) => {
+    rollbackVoteThread: (
+      state,
+      action: PayloadAction<{
+        threadId: string;
+        previousUpVotes: string[];
+        previousDownVotes: string[];
+      }>,
+    ) => {
       const { threadId, previousUpVotes, previousDownVotes } = action.payload;
 
       const thread = state.threads.find((t) => t.id === threadId);
@@ -240,7 +247,14 @@ const threadsSlice = createSlice({
         state.currentThread.downVotesBy = previousDownVotes;
       }
     },
-    rollbackVoteComment: (state, action: PayloadAction<{ commentId: string; previousUpVotes: string[]; previousDownVotes: string[] }>) => {
+    rollbackVoteComment: (
+      state,
+      action: PayloadAction<{
+        commentId: string;
+        previousUpVotes: string[];
+        previousDownVotes: string[];
+      }>,
+    ) => {
       const { commentId, previousUpVotes, previousDownVotes } = action.payload;
 
       if (!state.currentThread) { return; }
@@ -314,14 +328,14 @@ const threadsSlice = createSlice({
         state.error = action.error.message ?? 'Failed to create comment';
       })
       .addCase(voteThread.fulfilled, (state) => {
-        // Vote was successfully applied optimistically, no additional state changes needed
+        // Vote was successfully applied optimistically, no additional changes needed
         state.error = null;
       })
       .addCase(voteThread.rejected, (state, action) => {
         state.error = action.error.message ?? 'Failed to vote on thread';
       })
       .addCase(voteComment.fulfilled, (state) => {
-        // Vote was successfully applied optimistically, no additional state changes needed
+        // Vote was successfully applied optimistically, no additional changes needed
         state.error = null;
       })
       .addCase(voteComment.rejected, (state, action) => {
@@ -330,5 +344,13 @@ const threadsSlice = createSlice({
   },
 });
 
-export const { setSelectedCategory, clearCurrentThread, clearError, optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment } = threadsSlice.actions;
+export const {
+  setSelectedCategory,
+  clearCurrentThread,
+  clearError,
+  optimisticVoteThread,
+  optimisticVoteComment,
+  rollbackVoteThread,
+  rollbackVoteComment,
+} = threadsSlice.actions;
 export default threadsSlice.reducer;

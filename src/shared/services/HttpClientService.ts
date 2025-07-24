@@ -1,5 +1,4 @@
-import axios from 'axios';
-import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosInstance, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
 
 import type { IAuthService } from '../types/IAuthService';
 import type { INavigationService } from '../types/INavigationService';
@@ -32,7 +31,13 @@ export class HttpClientService {
       (config: InternalAxiosRequestConfig) => {
         const token = this.authService.getToken();
         if (token && config.headers) {
-          config.headers.Authorization = `Bearer ${token}`;
+          return {
+            ...config,
+            headers: {
+              ...config.headers,
+              Authorization: `Bearer ${token}`,
+            },
+          };
         }
         return config;
       },
