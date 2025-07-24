@@ -8,6 +8,8 @@ interface VoteButtonsProps {
   currentVote: 'up' | 'down' | null;
   upVotes?: number;
   downVotes?: number;
+  upVotesBy?: string[];
+  downVotesBy?: string[];
 }
 
 export function VoteButtons({
@@ -17,6 +19,8 @@ export function VoteButtons({
   currentVote,
   upVotes = 0,
   downVotes = 0,
+  upVotesBy = [],
+  downVotesBy = [],
 }: VoteButtonsProps) {
   const props = {
     itemType,
@@ -24,6 +28,8 @@ export function VoteButtons({
     upVotes,
     downVotes,
     currentVote,
+    upVotesBy,
+    downVotesBy,
     orientation: 'horizontal' as const,
     size: 'sm' as const,
     ...(commentId !== undefined && { commentId }),

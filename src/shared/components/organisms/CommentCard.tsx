@@ -13,7 +13,13 @@ import { SafeHtml } from '../ui/safe-html';
 interface CommentCardProps {
   comment: Comment;
   threadId: string;
-  VoteButtons?: React.ComponentType<unknown>;
+  VoteButtons?: React.ComponentType<{
+    commentId: string;
+    currentVote: 'up' | 'down' | null;
+    itemId: string;
+    itemType: 'comment';
+    voteCount: number;
+  }>;
   className?: string;
 }
 

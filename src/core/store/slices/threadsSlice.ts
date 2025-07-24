@@ -179,6 +179,78 @@ const threadsSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    optimisticVoteThread: (state, action: PayloadAction<{ threadId: string; voteType: 'up' | 'down' | 'neutral'; userId: string }>) => {
+      const { threadId, voteType, userId } = action.payload;
+
+      const thread = state.threads.find((t) => t.id === threadId);
+      if (thread) {
+        thread.upVotesBy = thread.upVotesBy.filter((id) => id !== userId);
+        thread.downVotesBy = thread.downVotesBy.filter((id) => id !== userId);
+
+        if (voteType === 'up') {
+          thread.upVotesBy.push(userId);
+        } else if (voteType === 'down') {
+          thread.downVotesBy.push(userId);
+        }
+      }
+
+      if (state.currentThread && state.currentThread.id === threadId) {
+        state.currentThread.upVotesBy = state.currentThread.upVotesBy.filter(
+          (id) => id !== userId,
+        );
+        state.currentThread.downVotesBy = state.currentThread.downVotesBy.filter(
+          (id) => id !== userId,
+        );
+
+        if (voteType === 'up') {
+          state.currentThread.upVotesBy.push(userId);
+        } else if (voteType === 'down') {
+          state.currentThread.downVotesBy.push(userId);
+        }
+      }
+    },
+    optimisticVoteComment: (state, action: PayloadAction<{ commentId: string; voteType: 'up' | 'down' | 'neutral'; userId: string }>) => {
+      const { commentId, voteType, userId } = action.payload;
+
+      if (!state.currentThread) { return; }
+
+      const comment = state.currentThread.comments.find((c) => c.id === commentId);
+      if (comment) {
+        comment.upVotesBy = comment.upVotesBy.filter((id) => id !== userId);
+        comment.downVotesBy = comment.downVotesBy.filter((id) => id !== userId);
+
+        if (voteType === 'up') {
+          comment.upVotesBy.push(userId);
+        } else if (voteType === 'down') {
+          comment.downVotesBy.push(userId);
+        }
+      }
+    },
+    rollbackVoteThread: (state, action: PayloadAction<{ threadId: string; previousUpVotes: string[]; previousDownVotes: string[] }>) => {
+      const { threadId, previousUpVotes, previousDownVotes } = action.payload;
+
+      const thread = state.threads.find((t) => t.id === threadId);
+      if (thread) {
+        thread.upVotesBy = previousUpVotes;
+        thread.downVotesBy = previousDownVotes;
+      }
+
+      if (state.currentThread && state.currentThread.id === threadId) {
+        state.currentThread.upVotesBy = previousUpVotes;
+        state.currentThread.downVotesBy = previousDownVotes;
+      }
+    },
+    rollbackVoteComment: (state, action: PayloadAction<{ commentId: string; previousUpVotes: string[]; previousDownVotes: string[] }>) => {
+      const { commentId, previousUpVotes, previousDownVotes } = action.payload;
+
+      if (!state.currentThread) { return; }
+
+      const comment = state.currentThread.comments.find((c) => c.id === commentId);
+      if (comment) {
+        comment.upVotesBy = previousUpVotes;
+        comment.downVotesBy = previousDownVotes;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -241,75 +313,22 @@ const threadsSlice = createSlice({
         state.isCreating = false;
         state.error = action.error.message ?? 'Failed to create comment';
       })
-      .addCase(voteThread.pending, (state) => {
-        state.isVoting = true;
+      .addCase(voteThread.fulfilled, (state) => {
+        // Vote was successfully applied optimistically, no additional state changes needed
         state.error = null;
-      })
-      .addCase(voteThread.fulfilled, (state, action) => {
-        state.isVoting = false;
-        const { threadId, voteType, userId } = action.payload;
-
-        if (!userId) { return; }
-
-        const thread = state.threads.find((t) => t.id === threadId);
-        if (thread) {
-          thread.upVotesBy = thread.upVotesBy.filter((id) => id !== userId);
-          thread.downVotesBy = thread.downVotesBy.filter((id) => id !== userId);
-
-          if (voteType === 'up') {
-            thread.upVotesBy.push(userId);
-          } else if (voteType === 'down') {
-            thread.downVotesBy.push(userId);
-          }
-        }
-
-        if (state.currentThread && state.currentThread.id === threadId) {
-          state.currentThread.upVotesBy = state.currentThread.upVotesBy.filter(
-            (id) => id !== userId,
-          );
-          state.currentThread.downVotesBy = state.currentThread.downVotesBy.filter(
-            (id) => id !== userId,
-          );
-
-          if (voteType === 'up') {
-            state.currentThread.upVotesBy.push(userId);
-          } else if (voteType === 'down') {
-            state.currentThread.downVotesBy.push(userId);
-          }
-        }
       })
       .addCase(voteThread.rejected, (state, action) => {
-        state.isVoting = false;
         state.error = action.error.message ?? 'Failed to vote on thread';
       })
-      .addCase(voteComment.pending, (state) => {
-        state.isVoting = true;
+      .addCase(voteComment.fulfilled, (state) => {
+        // Vote was successfully applied optimistically, no additional state changes needed
         state.error = null;
       })
-      .addCase(voteComment.fulfilled, (state, action) => {
-        state.isVoting = false;
-        const { commentId, voteType, userId } = action.payload;
-
-        if (!userId || !state.currentThread) { return; }
-
-        const comment = state.currentThread.comments.find((c) => c.id === commentId);
-        if (comment) {
-          comment.upVotesBy = comment.upVotesBy.filter((id) => id !== userId);
-          comment.downVotesBy = comment.downVotesBy.filter((id) => id !== userId);
-
-          if (voteType === 'up') {
-            comment.upVotesBy.push(userId);
-          } else if (voteType === 'down') {
-            comment.downVotesBy.push(userId);
-          }
-        }
-      })
       .addCase(voteComment.rejected, (state, action) => {
-        state.isVoting = false;
         state.error = action.error.message ?? 'Failed to vote on comment';
       });
   },
 });
 
-export const { setSelectedCategory, clearCurrentThread, clearError } = threadsSlice.actions;
+export const { setSelectedCategory, clearCurrentThread, clearError, optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment } = threadsSlice.actions;
 export default threadsSlice.reducer;

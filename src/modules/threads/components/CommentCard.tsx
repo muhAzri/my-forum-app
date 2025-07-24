@@ -59,6 +59,8 @@ export function CommentCard({ comment, threadId }: CommentCardProps) {
           itemId={threadId}
           itemType="comment"
           voteCount={voteScore}
+          upVotesBy={comment.upVotesBy}
+          downVotesBy={comment.downVotesBy}
         />
 
         <div className="flex items-center space-x-4 text-sm text-gray-500">

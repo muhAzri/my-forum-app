@@ -103,6 +103,8 @@ export function ThreadDetail() {
             itemId={currentThread.id}
             itemType="thread"
             voteCount={voteScore}
+            upVotesBy={currentThread.upVotesBy}
+            downVotesBy={currentThread.downVotesBy}
           />
 
           <div className="flex items-center justify-center sm:justify-end space-x-4 text-sm text-muted-foreground">

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { AppDispatch, RootState } from '../../../core/store';
-import { voteThread, voteComment } from '../../../core/store/slices/threadsSlice';
+import { voteThread, voteComment, optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment } from '../../../core/store/slices/threadsSlice';
 import Link from '../atoms/Link';
 import Text from '../atoms/Text';
 
@@ -15,6 +15,8 @@ interface EnhancedVoteControlsProps {
   upVotes: number;
   downVotes: number;
   currentVote: 'up' | 'down' | null;
+  upVotesBy: string[];
+  downVotesBy: string[];
   orientation?: 'vertical' | 'horizontal';
   size?: 'sm' | 'md';
   className?: string;
@@ -27,6 +29,8 @@ function EnhancedVoteControls({
   upVotes,
   downVotes,
   currentVote,
+  upVotesBy,
+  downVotesBy,
   orientation = 'horizontal',
   size = 'md',
   className,
@@ -38,18 +42,56 @@ function EnhancedVoteControls({
     if (!user) { return; }
 
     const finalVoteType = currentVote === voteType ? 'neutral' : voteType;
+    const userId = user.id;
 
+    // Store previous state for potential rollback
+    const previousUpVotes = [...upVotesBy];
+    const previousDownVotes = [...downVotesBy];
+
+    // Apply optimistic update immediately
     if (itemType === 'thread') {
-      dispatch(voteThread({
+      dispatch(optimisticVoteThread({
         threadId: itemId,
         voteType: finalVoteType,
+        userId,
       }));
+
+      // Dispatch the async action
+      try {
+        await dispatch(voteThread({
+          threadId: itemId,
+          voteType: finalVoteType,
+        })).unwrap();
+      } catch (error) {
+        // Rollback on error
+        dispatch(rollbackVoteThread({
+          threadId: itemId,
+          previousUpVotes,
+          previousDownVotes,
+        }));
+      }
     } else if (commentId) {
-      dispatch(voteComment({
-        threadId: itemId,
+      dispatch(optimisticVoteComment({
         commentId,
         voteType: finalVoteType,
+        userId,
       }));
+
+      // Dispatch the async action
+      try {
+        await dispatch(voteComment({
+          threadId: itemId,
+          commentId,
+          voteType: finalVoteType,
+        })).unwrap();
+      } catch (error) {
+        // Rollback on error
+        dispatch(rollbackVoteComment({
+          commentId,
+          previousUpVotes,
+          previousDownVotes,
+        }));
+      }
     }
   };
 
