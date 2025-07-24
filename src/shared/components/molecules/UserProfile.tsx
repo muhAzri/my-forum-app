@@ -10,12 +10,12 @@ interface UserProfileProps {
   email?: string;
   avatarUrl?: string;
   avatarSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  layout?: 'horizontal' | 'vertical';
+  layout?: 'horizontal' | 'vertical' | 'responsive';
   truncate?: boolean;
   className?: string;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({
+function UserProfile({
   name,
   email,
   avatarUrl,
@@ -23,14 +23,18 @@ const UserProfile: React.FC<UserProfileProps> = ({
   layout = 'horizontal',
   truncate = false,
   className,
-}) => {
+}: UserProfileProps) {
   const isHorizontal = layout === 'horizontal';
+  const isVertical = layout === 'vertical';
+  const isResponsive = layout === 'responsive';
 
   return (
     <div
       className={cn(
         'flex items-center',
-        isHorizontal ? 'space-x-3' : 'flex-col space-y-2 text-center',
+        isHorizontal && 'space-x-3',
+        isVertical && 'flex-col space-y-2 text-center',
+        isResponsive && 'flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 text-center sm:text-left',
         className,
       )}
     >
@@ -48,7 +52,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             'text-gray-900',
             truncate && 'truncate',
           )}
-          level={isHorizontal ? 3 : 4}
+          level={isVertical ? 4 : 3}
           weight="semibold"
         >
           {name}
@@ -67,6 +71,6 @@ const UserProfile: React.FC<UserProfileProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default UserProfile;

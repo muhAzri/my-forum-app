@@ -86,12 +86,12 @@ export function ThreadList() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Forum Discussions</h1>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 space-y-4 sm:space-y-0">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Forum Discussions</h1>
         {token && user && (
-          <Button asChild>
-            <Link className="inline-flex items-center gap-2" to="/create-thread">
+          <Button asChild className="w-full sm:w-auto">
+            <Link className="inline-flex items-center justify-center gap-2" to="/create-thread">
               <Plus className="w-4 h-4" />
               New Thread
             </Link>
@@ -106,21 +106,21 @@ export function ThreadList() {
       />
 
       {filteredThreads.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">
+        <div className="text-center py-8 sm:py-12">
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">
             {selectedCategory
               ? `No threads found in the "${selectedCategory}" category.`
               : 'No threads found.'
             }
           </p>
           {token && user && (
-            <Button asChild>
-              <Link className="inline-flex items-center" to="/create-thread">Create the first thread</Link>
+            <Button asChild className="w-full sm:w-auto">
+              <Link className="inline-flex items-center justify-center" to="/create-thread">Create the first thread</Link>
             </Button>
           )}
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {isLoading && threads.length > 0 && (
             <div className="text-center py-4">
               <div className="inline-flex items-center px-4 py-2 bg-primary-50 text-primary-700 rounded-lg">

@@ -29,7 +29,7 @@ export function AuthButton() {
 
   if (token && user) {
     return (
-      <div className="flex items-center space-x-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
         <div className="flex items-center space-x-2">
           <Avatar
             alt={user.name}
@@ -37,12 +37,12 @@ export function AuthButton() {
             size="sm"
             src={user.avatar}
           />
-          <Text className="text-gray-700" variant="small" weight="medium">
+          <Text className="text-gray-700 truncate max-w-[120px] sm:max-w-none" variant="small" weight="medium">
             {user.name}
           </Text>
         </div>
         <Button
-          className="text-gray-600 hover:text-gray-900"
+          className="text-gray-600 hover:text-gray-900 w-full sm:w-auto"
           onClick={handleLogout}
           size="sm"
           variant="ghost"
@@ -55,11 +55,11 @@ export function AuthButton() {
   }
 
   return (
-    <div className="flex items-center space-x-2">
-      <Button asChild size="sm" variant="ghost">
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
+      <Button asChild className="w-full sm:w-auto" size="sm" variant="ghost">
         <Link to="/login">Sign In</Link>
       </Button>
-      <Button asChild size="sm">
+      <Button asChild className="w-full sm:w-auto" size="sm">
         <Link to="/register">Sign Up</Link>
       </Button>
     </div>
