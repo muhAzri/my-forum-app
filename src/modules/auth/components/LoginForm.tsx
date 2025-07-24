@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import { loginUser, fetchCurrentUser } from '../../../core/store/slices/authSlice';
-import { Button } from '../../../shared/components/ui/button';
-import { Input } from '../../../shared/components/ui/input';
-import { TypingLoader } from '../../../shared/components/ui/pulse-loader';
+import Button from '../../../shared/components/atoms/Button';
+import Heading from '../../../shared/components/atoms/Heading';
+import Link from '../../../shared/components/atoms/Link';
+import Spinner from '../../../shared/components/atoms/Spinner';
+import Text from '../../../shared/components/atoms/Text';
+import AlertMessage from '../../../shared/components/molecules/AlertMessage';
+import FormField from '../../../shared/components/molecules/FormField';
 
 export function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -64,35 +68,37 @@ export function LoginForm() {
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">
+        <Heading className="text-center mb-6 text-gray-900" level={2}>
           Sign In
-        </h2>
+        </Heading>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-            <p className="text-sm text-red-600">{error}</p>
-          </div>
+          <AlertMessage className="mb-4" variant="error">
+            {error}
+          </AlertMessage>
         )}
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <Input
+          <FormField
             disabled={isLoading}
             error={formErrors['email']}
             label="Email"
             name="email"
             onChange={handleInputChange}
             placeholder="Enter your email"
+            required
             type="email"
             value={formData.email}
           />
 
-          <Input
+          <FormField
             disabled={isLoading}
             error={formErrors['password']}
             label="Password"
             name="password"
             onChange={handleInputChange}
             placeholder="Enter your password"
+            required
             type="password"
             value={formData.password}
           />
@@ -103,19 +109,22 @@ export function LoginForm() {
             type="submit"
           >
             {isLoading ? (
-              <TypingLoader text="Signing in" />
+              <div className="flex items-center gap-2">
+                <Spinner size="sm" />
+                <span>Signing in...</span>
+              </div>
             ) : (
               'Sign In'
             )}
           </Button>
         </form>
 
-        <p className="mt-4 text-center text-sm text-gray-600">
+        <Text className="mt-4 text-center text-gray-600" variant="small">
           Don't have an account?{' '}
-          <Link className="text-primary-600 hover:text-primary-700 font-medium" to="/register">
+          <Link className="font-medium" to="/register">
             Sign up
           </Link>
-        </p>
+        </Text>
       </div>
     </div>
   );

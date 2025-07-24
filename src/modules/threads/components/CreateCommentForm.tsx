@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import { createComment } from '../../../core/store/slices/threadsSlice';
-import { Button } from '../../../shared/components/ui/button';
-import { TypingLoader } from '../../../shared/components/ui/pulse-loader';
+import Button from '../../../shared/components/atoms/Button';
+import Spinner from '../../../shared/components/atoms/Spinner';
 import { RichTextEditor } from '../../../shared/components/ui/rich-text-editor';
 import { stripHtml } from '../../../shared/utils/sanitize';
 
@@ -55,7 +55,10 @@ export function CreateCommentForm({ threadId }: CreateCommentFormProps) {
 
       <Button disabled={isCreating || !stripHtml(content).trim()} type="submit">
         {isCreating ? (
-          <TypingLoader text="Posting comment" />
+          <div className="flex items-center gap-2">
+            <Spinner size="sm" />
+            <span>Posting comment...</span>
+          </div>
         ) : (
           'Post Comment'
         )}

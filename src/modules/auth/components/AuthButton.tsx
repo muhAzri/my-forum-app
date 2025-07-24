@@ -1,10 +1,14 @@
-import { LogOut, User } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import { logout } from '../../../core/store/slices/authSlice';
-import { Button } from '../../../shared/components/ui/button';
+import Avatar from '../../../shared/components/atoms/Avatar';
+import Button from '../../../shared/components/atoms/Button';
+import Icon from '../../../shared/components/atoms/Icon';
+import Skeleton from '../../../shared/components/atoms/Skeleton';
+import Text from '../../../shared/components/atoms/Text';
 
 export function AuthButton() {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,8 +21,8 @@ export function AuthButton() {
   if (!isInitialized || isLoading) {
     return (
       <div className="flex items-center space-x-2">
-        <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse" />
-        <div className="w-16 h-4 bg-gray-200 rounded animate-pulse" />
+        <Skeleton className="w-8 h-8 rounded-full" />
+        <Skeleton className="w-16 h-4" />
       </div>
     );
   }
@@ -27,18 +31,15 @@ export function AuthButton() {
     return (
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-2">
-          {user.avatar ? (
-            <img
-              alt={user.name}
-              className="w-8 h-8 rounded-full"
-              src={user.avatar}
-            />
-          ) : (
-            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-              <User className="w-4 h-4 text-gray-500" />
-            </div>
-          )}
-          <span className="text-sm font-medium text-gray-700">{user.name}</span>
+          <Avatar
+            alt={user.name}
+            fallback={user.name.charAt(0).toUpperCase()}
+            size="sm"
+            src={user.avatar}
+          />
+          <Text className="text-gray-700" variant="small" weight="medium">
+            {user.name}
+          </Text>
         </div>
         <Button
           className="text-gray-600 hover:text-gray-900"
@@ -46,7 +47,7 @@ export function AuthButton() {
           size="sm"
           variant="ghost"
         >
-          <LogOut className="w-4 h-4 mr-1" />
+          <Icon className="mr-1" icon={LogOut} size="sm" />
           Logout
         </Button>
       </div>

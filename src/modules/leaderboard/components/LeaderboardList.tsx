@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import { fetchLeaderboards } from '../../../core/store/slices/leaderboardSlice';
-import { Button } from '../../../shared/components/ui/button';
+import Button from '../../../shared/components/atoms/Button';
+import Skeleton from '../../../shared/components/atoms/Skeleton';
+import Text from '../../../shared/components/atoms/Text';
+import AlertMessage from '../../../shared/components/molecules/AlertMessage';
+import EmptyState from '../../../shared/components/molecules/EmptyState';
+import PageHeader from '../../../shared/components/molecules/PageHeader';
 import { LoadingCard } from '../../../shared/components/ui/pulse-loader';
-import { Skeleton } from '../../../shared/components/ui/skeleton';
 
-import { LeaderboardCard } from './LeaderboardCard';
+import LeaderboardCard from './LeaderboardCard';
 
 export function LeaderboardList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,30 +58,35 @@ export function LeaderboardList() {
 
   if (error) {
     return (
-      <div className="text-center py-12">
-        <p className="text-red-600 mb-4">{error}</p>
-        <Button onClick={() => dispatch(fetchLeaderboards())}>
-          Retry
-        </Button>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <AlertMessage
+          className="text-center"
+          variant="error"
+        >
+          <div className="space-y-4">
+            <Text variant="body">{error}</Text>
+            <Button onClick={() => dispatch(fetchLeaderboards())}>
+              Retry
+            </Button>
+          </div>
+        </AlertMessage>
       </div>
     );
   }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Leaderboard
-        </h1>
-        <p className="text-gray-600">
-          Top contributors in our forum community
-        </p>
-      </div>
+      <PageHeader
+        className="text-center justify-center"
+        subtitle="Top contributors in our forum community"
+        title="Leaderboard"
+      />
 
       {leaderboards.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-gray-600">No leaderboard data available.</p>
-        </div>
+        <EmptyState
+          message="There are no contributors to display yet. Start participating in the forum to see rankings!"
+          title="No Leaderboard Data"
+        />
       ) : (
         <div className="space-y-4">
           {leaderboards.map((entry, index) => (

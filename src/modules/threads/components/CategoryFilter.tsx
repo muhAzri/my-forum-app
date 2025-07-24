@@ -1,5 +1,7 @@
 import { Filter } from 'lucide-react';
 
+import Icon from '../../../shared/components/atoms/Icon';
+import Text from '../../../shared/components/atoms/Text';
 import { Select, type SelectOption } from '../../../shared/components/ui/select';
 import { capitalizeCategory } from '../../../shared/utils/utils';
 
@@ -35,8 +37,10 @@ export function CategoryFilter({
   return (
     <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-3 mb-6">
       <div className="flex items-center space-x-2">
-        <Filter className="w-4 h-4 text-gray-500" />
-        <span className="text-sm font-medium text-gray-700">Filter by category:</span>
+        <Icon className="text-gray-500" icon={Filter} size="sm" />
+        <Text className="text-gray-700" variant="small" weight="medium">
+          Filter by category:
+        </Text>
       </div>
 
       <Select

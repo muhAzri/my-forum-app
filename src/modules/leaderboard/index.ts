@@ -1,2 +1,2 @@
 export { LeaderboardList } from './components/LeaderboardList';
-export { LeaderboardCard } from './components/LeaderboardCard';
+export { default as LeaderboardCard } from './components/LeaderboardCard';
