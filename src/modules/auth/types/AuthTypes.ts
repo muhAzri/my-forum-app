@@ -25,17 +25,17 @@ export interface AuthState {
 }
 
 export interface IAuthService {
-  login(credentials: LoginCredentials): Promise<{ user: User; token: string }>;
-  register(data: RegisterData): Promise<User>;
+  login(_credentials: LoginCredentials): Promise<{ user: User; token: string }>;
+  register(_data: RegisterData): Promise<User>;
   getCurrentUser(): Promise<User>;
   logout(): Promise<void>;
   getToken(): string | null;
-  setToken(token: string | null): void;
+  setToken(_token: string | null): void;
 }
 
 export interface AuthContextValue extends AuthState {
-  login: (credentials: LoginCredentials) => Promise<{ success: boolean; error?: string }>;
-  register: (data: RegisterData) => Promise<{ success: boolean; user?: User; error?: string }>;
+  login: (_credentials: LoginCredentials) => Promise<{ success: boolean; error?: string }>;
+  register: (_data: RegisterData) => Promise<{ success: boolean; user?: User; error?: string }>;
   logout: () => Promise<void>;
   getCurrentUser: () => Promise<void>;
 }

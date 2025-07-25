@@ -120,7 +120,7 @@ export function LoginForm() {
         </form>
 
         <Text className="mt-4 text-center text-gray-600" variant="small">
-          Don't have an account?
+          Don&apos;t have an account?
           {' '}
           <Link className="font-medium" to="/register">
             Sign up

@@ -33,7 +33,8 @@ export function VoteButtons({
     if (itemType === 'thread') {
       voteOnThread(itemId, finalVoteType, upVotesBy, downVotesBy).then(() => onVoteSuccess?.());
     } else if (itemType === 'comment' && threadId) {
-      voteOnComment(threadId, itemId, finalVoteType, upVotesBy, downVotesBy).then(() => onVoteSuccess?.());
+      voteOnComment(threadId, itemId, finalVoteType, upVotesBy, downVotesBy)
+        .then(() => onVoteSuccess?.());
     }
   };
 

@@ -93,7 +93,14 @@ export default [
       }],
       
       // TypeScript specific rules
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': ['error', { 
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      }],
+      'no-unused-vars': ['error', { 
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      }],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/explicit-function-return-type': 'off',
@@ -101,6 +108,12 @@ export default [
       '@typescript-eslint/prefer-nullish-coalescing': 'error',
       '@typescript-eslint/prefer-optional-chain': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+      
+      // Relax some strict rules for development
+      'class-methods-use-this': 'off',
+      'max-classes-per-file': ['error', 5],
+      'jsx-a11y/label-has-associated-control': 'off',
+      'react/no-unused-prop-types': 'off',
       
       // Import rules
       'import/prefer-default-export': 'off',

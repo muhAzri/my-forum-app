@@ -13,7 +13,7 @@ export class LocalStorageService implements IStorageService {
     try {
       localStorage.setItem(key, value);
     } catch {
-
+      // localStorage operations may fail in some environments (e.g., incognito mode)
     }
   }
 
@@ -21,7 +21,7 @@ export class LocalStorageService implements IStorageService {
     try {
       localStorage.removeItem(key);
     } catch {
-
+      // localStorage operations may fail in some environments (e.g., incognito mode)
     }
   }
 
@@ -29,7 +29,7 @@ export class LocalStorageService implements IStorageService {
     try {
       localStorage.clear();
     } catch {
-
+      // localStorage operations may fail in some environments (e.g., incognito mode)
     }
   }
 }

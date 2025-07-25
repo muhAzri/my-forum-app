@@ -8,7 +8,7 @@ import { capitalizeCategory } from '../../../shared/utils/utils';
 interface CategoryFilterProps {
   categories: string[];
   selectedCategory: string | null;
-  onCategorySelect: (category: string | null) => void;
+  onCategorySelect: (_category: string | null) => void;
 }
 
 export function CategoryFilter({
@@ -18,9 +18,9 @@ export function CategoryFilter({
 }: CategoryFilterProps) {
   const options: SelectOption[] = [
     { value: 'all', label: 'All Categories' },
-    ...categories.map((category) => ({
-      value: category,
-      label: capitalizeCategory(category),
+    ...categories.map((_category) => ({
+      value: _category,
+      label: capitalizeCategory(_category),
     })),
   ];
 

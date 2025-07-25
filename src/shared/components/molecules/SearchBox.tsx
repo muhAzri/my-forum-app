@@ -9,7 +9,7 @@ import Input from '../atoms/Input';
 export interface SearchBoxProps {
   placeholder?: string;
   value?: string;
-  onSearch: (query: string) => void;
+  onSearch: (_query: string) => void;
   onClear?: () => void;
   className?: string;
 }

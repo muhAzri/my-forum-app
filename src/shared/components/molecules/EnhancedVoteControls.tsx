@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import {
-  voteThread, voteComment, optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment,
+  voteThread,
+  voteComment,
+  optimisticVoteThread,
+  optimisticVoteComment,
+  rollbackVoteThread,
+  rollbackVoteComment,
 } from '../../../core/store/slices/threadsSlice';
 import Link from '../atoms/Link';
 import Text from '../atoms/Text';

@@ -10,19 +10,19 @@ export interface VoteState {
 
 export interface VotingContextValue {
   getVoteState: (
-    itemId: string,
-    upVotesBy: string[],
-    downVotesBy: string[],
-    userId?: string
+    _itemId: string,
+    _upVotesBy: string[],
+    _downVotesBy: string[],
+    _userId?: string
   ) => VoteState;
-  voteOnThread: (threadId: string, voteType: VoteType) => Promise<void>;
-  voteOnComment: (threadId: string, commentId: string, voteType: VoteType) => Promise<void>;
+  voteOnThread: (_threadId: string, _voteType: VoteType) => Promise<void>;
+  voteOnComment: (_threadId: string, _commentId: string, _voteType: VoteType) => Promise<void>;
   isVoting: boolean;
 }
 
 export interface IVotingService {
-  voteOnThread(threadId: string, voteType: VoteType): Promise<void>;
-  voteOnComment(threadId: string, commentId: string, voteType: VoteType): Promise<void>;
+  voteOnThread(_threadId: string, _voteType: VoteType): Promise<void>;
+  voteOnComment(_threadId: string, _commentId: string, _voteType: VoteType): Promise<void>;
 }
 
 export interface VotingProps {

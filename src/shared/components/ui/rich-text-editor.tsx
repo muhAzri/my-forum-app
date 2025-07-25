@@ -8,7 +8,7 @@ import { cn } from '../../utils/utils';
 
 interface RichTextEditorProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (_value: string) => void;
   placeholder?: string;
   className?: string;
   disabled?: boolean;

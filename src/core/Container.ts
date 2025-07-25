@@ -1,12 +1,12 @@
-type Constructor<T = Record<string, unknown>> = new (...args: unknown[]) => T;
-type Factory<T> = (...args: unknown[]) => T;
+type Constructor<T = Record<string, unknown>> = new (..._args: unknown[]) => T;
+type Factory<T> = (..._args: unknown[]) => T;
 type ServiceDefinition<T> = Constructor<T> | Factory<T> | T;
 
 export interface IContainer {
-  register<T>(key: string, definition: ServiceDefinition<T>, options?: RegisterOptions): void;
-  resolve<T>(key: string): T;
-  registerSingleton<T>(key: string, definition: ServiceDefinition<T>): void;
-  registerTransient<T>(key: string, definition: ServiceDefinition<T>): void;
+  register<T>(_key: string, _definition: ServiceDefinition<T>, _options?: RegisterOptions): void;
+  resolve<T>(_key: string): T;
+  registerSingleton<T>(_key: string, _definition: ServiceDefinition<T>): void;
+  registerTransient<T>(_key: string, _definition: ServiceDefinition<T>): void;
 }
 
 export interface RegisterOptions {
@@ -58,11 +58,11 @@ export class Container implements IContainer {
   }
 
   private createInstance<T>(definition: ServiceDefinition<T>): T {
-    if (typeof definition === 'object' && definition !== null && !this.isConstructor(definition)) {
+    if (typeof definition === 'object' && definition !== null && !Container.isConstructor(definition)) {
       return definition as T;
     }
 
-    if (this.isConstructor(definition)) {
+    if (Container.isConstructor(definition)) {
       return new (definition as Constructor<T>)();
     }
 
@@ -73,7 +73,7 @@ export class Container implements IContainer {
     throw new Error('Invalid service definition');
   }
 
-  private isConstructor(definition: unknown): boolean {
+  private static isConstructor(definition: unknown): boolean {
     return typeof definition === 'function' && definition.prototype && definition.prototype.constructor === definition;
   }
 

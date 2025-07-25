@@ -1,7 +1,5 @@
 import { Calendar, User } from 'lucide-react';
-import { useSelector } from 'react-redux';
 
-import type { RootState } from '../../../core/store';
 import { SafeHtml } from '../../../shared/components/ui/safe-html';
 import type { Comment } from '../../../shared/types/forum';
 import { formatTimeAgo } from '../../../shared/utils/utils';
@@ -13,8 +11,6 @@ interface CommentCardProps {
 }
 
 export function CommentCard({ comment, threadId }: CommentCardProps) {
-  const { user } = useSelector((state: RootState) => state.auth);
-
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="flex items-center space-x-3 mb-4">

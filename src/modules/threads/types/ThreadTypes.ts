@@ -55,9 +55,9 @@ export interface ThreadsState {
 
 export interface IThreadsService {
   getThreads(): Promise<Thread[]>;
-  getThreadDetail(id: string): Promise<ThreadDetail>;
-  createThread(data: CreateThreadData): Promise<Thread>;
-  createComment(threadId: string, data: CreateCommentData): Promise<Comment>;
-  voteThread(threadId: string, voteType: 'up' | 'down' | 'neutral'): Promise<void>;
-  voteComment(threadId: string, commentId: string, voteType: 'up' | 'down' | 'neutral'): Promise<void>;
+  getThreadDetail(_id: string): Promise<ThreadDetail>;
+  createThread(_data: CreateThreadData): Promise<Thread>;
+  createComment(_threadId: string, _data: CreateCommentData): Promise<Comment>;
+  voteThread(_threadId: string, _voteType: 'up' | 'down' | 'neutral'): Promise<void>;
+  voteComment(_threadId: string, _commentId: string, _voteType: 'up' | 'down' | 'neutral'): Promise<void>;
 }

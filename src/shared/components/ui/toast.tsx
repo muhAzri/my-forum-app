@@ -11,7 +11,7 @@ export interface ToastProps {
   title: string;
   description?: string | undefined;
   duration?: number;
-  onClose: (id: string) => void;
+  onClose: (_id: string) => void;
 }
 
 export function Toast({
@@ -95,7 +95,7 @@ export function Toast({
 
 export interface ToastContainerProps {
   toasts: ToastProps[];
-  onClose: (id: string) => void;
+  onClose: (_id: string) => void;
 }
 
 export function ToastContainer({ toasts, onClose }: ToastContainerProps) {

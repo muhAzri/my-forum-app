@@ -1,4 +1,4 @@
 export interface INavigationService {
-  navigateTo(path: string): void
+  navigateTo(_path: string): void
   getCurrentPath(): string
 }

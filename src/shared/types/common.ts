@@ -64,5 +64,5 @@ export interface IDomainEvent {
 
 export interface IEntity {
   getId(): string;
-  equals(other: IEntity): boolean;
+  equals(_other: IEntity): boolean;
 }

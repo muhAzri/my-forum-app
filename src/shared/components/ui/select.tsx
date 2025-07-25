@@ -12,7 +12,7 @@ interface SelectProps {
   value?: string;
   placeholder?: string;
   options: SelectOption[];
-  onValueChange: (value: string) => void;
+  onValueChange: (_value: string) => void;
   className?: string;
   disabled?: boolean;
   searchable?: boolean;
