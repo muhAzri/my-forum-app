@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import type { RootState } from '../../../core/store';
-import type { Comment } from '../../../shared/types/forum';
+import type { Comment } from '../../types/forum';
 import { cn } from '../../utils/utils';
 import Icon from '../atoms/Icon';
 import Text from '../atoms/Text';

@@ -35,7 +35,8 @@ export function SafeHtml({ html, className }: SafeHtmlProps) {
       />
 
       {/* Match Quill editor styling exactly */}
-      <style>{`
+      <style>
+        {`
         .safe-html-content blockquote {
           border-left: 4px solid var(--color-primary-600) !important;
           background-color: var(--color-primary-50) !important;

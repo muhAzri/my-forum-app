@@ -1,9 +1,9 @@
 import { MessageCircle, ThumbsUp, ThumbsDown } from 'lucide-react';
 import React from 'react';
 
-import type { Thread } from '../../../shared/types/forum';
-import { createExcerpt } from '../../../shared/utils/sanitize';
-import { capitalizeCategory, cn } from '../../../shared/utils/utils';
+import type { Thread } from '../../types/forum';
+import { createExcerpt } from '../../utils/sanitize';
+import { capitalizeCategory, cn } from '../../utils/utils';
 import Heading from '../atoms/Heading';
 import Icon from '../atoms/Icon';
 import Link from '../atoms/Link';
@@ -87,7 +87,8 @@ function ThreadCard({ thread, author, className }: ThreadCardProps) {
             variant="body"
             weight="semibold"
           >
-            {voteScore > 0 ? '+' : ''}{voteScore}
+            {voteScore > 0 ? '+' : ''}
+            {voteScore}
           </Text>
           <Text className="ml-1 sm:ml-0" variant="caption">votes</Text>
         </div>

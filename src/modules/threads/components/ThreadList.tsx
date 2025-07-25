@@ -113,8 +113,7 @@ export function ThreadList() {
           <p className="text-gray-600 mb-4 text-sm sm:text-base">
             {selectedCategory
               ? `No threads found in the "${selectedCategory}" category.`
-              : 'No threads found.'
-            }
+              : 'No threads found.'}
           </p>
           {token && user && (
             <Button asChild className="w-full sm:w-auto">

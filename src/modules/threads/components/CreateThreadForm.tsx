@@ -28,17 +28,17 @@ export function CreateThreadForm() {
   const validateForm = () => {
     const errors: Record<string, string> = {};
 
-    if (!formData['title'].trim()) {
-      errors['title'] = 'Title is required';
+    if (!formData.title.trim()) {
+      errors.title = 'Title is required';
     }
 
-    const bodyText = stripHtml(formData['body']).trim();
+    const bodyText = stripHtml(formData.body).trim();
     if (!bodyText) {
-      errors['body'] = 'Content is required';
+      errors.body = 'Content is required';
     }
 
-    if (!formData['category'].trim()) {
-      errors['category'] = 'Category is required';
+    if (!formData.category.trim()) {
+      errors.category = 'Category is required';
     }
 
     setFormErrors(errors);
@@ -84,14 +84,14 @@ export function CreateThreadForm() {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <Input
             disabled={isCreating}
-            error={formErrors['title']}
+            error={formErrors.title}
             label="Title"
             name="title"
             onChange={handleInputChange}
             placeholder="Enter thread title"
             required
             type="text"
-            value={formData['title']}
+            value={formData.title}
           />
 
           <div className="space-y-2">
@@ -105,7 +105,7 @@ export function CreateThreadForm() {
               name="category"
               onChange={handleInputChange}
               required
-              value={formData['category']}
+              value={formData.category}
             >
               <option value="">Select a category</option>
               {categories.map((category) => (
@@ -119,20 +119,20 @@ export function CreateThreadForm() {
               <option value="News">News</option>
               <option value="Help">Help</option>
             </select>
-            {formErrors['category'] && (
-              <p className="text-sm text-red-600">{formErrors['category']}</p>
+            {formErrors.category && (
+              <p className="text-sm text-red-600">{formErrors.category}</p>
             )}
           </div>
 
           <RichTextEditor
             disabled={isCreating}
-            error={formErrors['body']}
+            error={formErrors.body}
             label="Content"
             maxHeight={500}
             minHeight={200}
             onChange={(value) => {
               setFormData((prev) => ({ ...prev, body: value }));
-              if (formErrors['body']) {
+              if (formErrors.body) {
                 setFormErrors((prev) => ({ ...prev, body: '' }));
               }
             }}

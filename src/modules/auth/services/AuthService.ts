@@ -1,7 +1,10 @@
-import type { IAuthService, User, LoginCredentials, RegisterData } from '../types/AuthTypes';
+import type {
+  IAuthService, User, LoginCredentials, RegisterData,
+} from '../types/AuthTypes';
 
 export class AuthService implements IAuthService {
   private readonly baseURL = 'https://forum-api.dicoding.dev/v1';
+
   private token: string | null = null;
 
   constructor() {

@@ -1,4 +1,6 @@
-import { Calendar, MessageCircle, ThumbsDown, ThumbsUp, User } from 'lucide-react';
+import {
+  Calendar, MessageCircle, ThumbsDown, ThumbsUp, User,
+} from 'lucide-react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -8,8 +10,8 @@ import { fetchThreadDetail } from '../../../core/store/slices/threadsSlice';
 import { SafeHtml } from '../../../shared/components/ui/safe-html';
 import { ThreadDetailSkeleton } from '../../../shared/components/ui/skeleton';
 import { formatTimeAgo, capitalizeCategory } from '../../../shared/utils/utils';
-
 import { VoteButtons } from '../../voting/components/VoteButtons';
+
 import { CommentList } from './CommentList';
 import { CreateCommentForm } from './CreateCommentForm';
 
@@ -48,7 +50,6 @@ export function ThreadDetail() {
       </div>
     );
   }
-
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
@@ -119,7 +120,9 @@ export function ThreadDetail() {
 
       <div className="mt-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Comments ({currentThread.comments.length})
+          Comments (
+          {currentThread.comments.length}
+          )
         </h2>
 
         {user ? (

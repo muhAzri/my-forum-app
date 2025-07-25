@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { container } from '../../../core/Container';
 import type { RootState } from '../../../core/store';
-import { optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment } from '../../../core/store/slices/threadsSlice';
+import {
+  optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment,
+} from '../../../core/store/slices/threadsSlice';
 import type { IVotingService, VoteType, VoteState } from '../types/VotingTypes';
 
 export function useVoting() {
@@ -48,10 +50,10 @@ export function useVoting() {
   }, [user?.id]);
 
   const voteOnThread = useCallback(async (
-    threadId: string, 
-    voteType: VoteType, 
-    currentUpVotes: string[], 
-    currentDownVotes: string[]
+    threadId: string,
+    voteType: VoteType,
+    currentUpVotes: string[],
+    currentDownVotes: string[],
   ) => {
     if (!isAuthenticated || !user?.id) {
       throw new Error('You must be logged in to vote');
@@ -60,7 +62,7 @@ export function useVoting() {
     // Store previous state for rollback
     const previousUpVotes = [...currentUpVotes];
     const previousDownVotes = [...currentDownVotes];
-    
+
     // Apply optimistic update immediately
     dispatch(optimisticVoteThread({ threadId, voteType, userId: user.id }));
 
@@ -81,7 +83,7 @@ export function useVoting() {
     commentId: string,
     voteType: VoteType,
     currentUpVotes: string[],
-    currentDownVotes: string[]
+    currentDownVotes: string[],
   ) => {
     if (!isAuthenticated || !user?.id) {
       throw new Error('You must be logged in to vote');
@@ -90,7 +92,7 @@ export function useVoting() {
     // Store previous state for rollback
     const previousUpVotes = [...currentUpVotes];
     const previousDownVotes = [...currentDownVotes];
-    
+
     // Apply optimistic update immediately
     dispatch(optimisticVoteComment({ commentId, voteType, userId: user.id }));
 

@@ -29,7 +29,13 @@ function ThreadDetailLayout({
             {thread.title}
           </Heading>
           <Text variant="muted">
-            By {thread.author} • {new Date(thread.createdAt).toLocaleDateString()}
+            By
+            {' '}
+            {thread.author}
+            {' '}
+            •
+            {' '}
+            {new Date(thread.createdAt).toLocaleDateString()}
           </Text>
         </div>
       )}

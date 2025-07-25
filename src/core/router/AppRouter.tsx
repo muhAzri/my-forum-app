@@ -21,11 +21,11 @@ export function AppRouter() {
             <Route element={<Threads />} path="threads" />
             <Route element={<ThreadDetail />} path="threads/:id" />
             <Route
-              element={
+              element={(
                 <ProtectedRoute>
                   <CreateThread />
                 </ProtectedRoute>
-              }
+              )}
               path="create-thread"
             />
             <Route element={<Leaderboard />} path="leaderboard" />

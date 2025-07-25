@@ -29,13 +29,13 @@ export function LoginForm() {
     const errors: Record<string, string> = {};
 
     if (!formData.email) {
-      errors['email'] = 'Email is required';
+      errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors['email'] = 'Email is invalid';
+      errors.email = 'Email is invalid';
     }
 
     if (!formData.password) {
-      errors['password'] = 'Password is required';
+      errors.password = 'Password is required';
     }
 
     setFormErrors(errors);
@@ -81,7 +81,7 @@ export function LoginForm() {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <FormField
             disabled={isLoading}
-            error={formErrors['email']}
+            error={formErrors.email}
             label="Email"
             name="email"
             onChange={handleInputChange}
@@ -93,7 +93,7 @@ export function LoginForm() {
 
           <FormField
             disabled={isLoading}
-            error={formErrors['password']}
+            error={formErrors.password}
             label="Password"
             name="password"
             onChange={handleInputChange}
@@ -120,7 +120,8 @@ export function LoginForm() {
         </form>
 
         <Text className="mt-4 text-center text-gray-600" variant="small">
-          Don't have an account?{' '}
+          Don't have an account?
+          {' '}
           <Link className="font-medium" to="/register">
             Sign up
           </Link>

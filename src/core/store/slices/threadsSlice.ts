@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
 
-import type { ThreadsState, Thread, ThreadDetail, Comment, ApiResponse, AuthState } from '../../../shared/types/forum';
+import type {
+  ThreadsState, Thread, ThreadDetail, Comment, ApiResponse, AuthState,
+} from '../../../shared/types/forum';
 
 const initialState: ThreadsState = {
   threads: [],
@@ -162,7 +164,9 @@ export const voteComment = createAsyncThunk(
       throw new Error('Failed to vote comment');
     }
 
-    return { threadId, commentId, voteType, userId: auth.user?.id };
+    return {
+      threadId, commentId, voteType, userId: auth.user?.id,
+    };
   },
 );
 

@@ -81,7 +81,10 @@ export function SmartProgressBar({ className, message = 'Loading...' }: SmartPro
         />
       </div>
       <div className="mt-1 text-right">
-        <span className="text-xs text-gray-500">{Math.round(progress)}%</span>
+        <span className="text-xs text-gray-500">
+          {Math.round(progress)}
+          %
+        </span>
       </div>
     </div>
   );

@@ -29,26 +29,26 @@ export function RegisterForm() {
   const validateForm = () => {
     const errors: Record<string, string> = {};
 
-    if (!formData['name']) {
-      errors['name'] = 'Name is required';
+    if (!formData.name) {
+      errors.name = 'Name is required';
     }
 
-    if (!formData['email']) {
-      errors['email'] = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData['email'])) {
-      errors['email'] = 'Email is invalid';
+    if (!formData.email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Email is invalid';
     }
 
-    if (!formData['password']) {
-      errors['password'] = 'Password is required';
-    } else if (formData['password'].length < 6) {
-      errors['password'] = 'Password must be at least 6 characters';
+    if (!formData.password) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
     }
 
-    if (!formData['confirmPassword']) {
-      errors['confirmPassword'] = 'Please confirm your password';
-    } else if (formData['password'] !== formData['confirmPassword']) {
-      errors['confirmPassword'] = 'Passwords do not match';
+    if (!formData.confirmPassword) {
+      errors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
     }
 
     setFormErrors(errors);
@@ -98,31 +98,31 @@ export function RegisterForm() {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <FormField
             disabled={isLoading}
-            error={formErrors['name']}
+            error={formErrors.name}
             label="Full Name"
             name="name"
             onChange={handleInputChange}
             placeholder="Enter your full name"
             required
             type="text"
-            value={formData['name']}
+            value={formData.name}
           />
 
           <FormField
             disabled={isLoading}
-            error={formErrors['email']}
+            error={formErrors.email}
             label="Email"
             name="email"
             onChange={handleInputChange}
             placeholder="Enter your email"
             required
             type="email"
-            value={formData['email']}
+            value={formData.email}
           />
 
           <FormField
             disabled={isLoading}
-            error={formErrors['password']}
+            error={formErrors.password}
             helperText="Password must be at least 6 characters"
             label="Password"
             name="password"
@@ -130,19 +130,19 @@ export function RegisterForm() {
             placeholder="Enter your password (min. 6 characters)"
             required
             type="password"
-            value={formData['password']}
+            value={formData.password}
           />
 
           <FormField
             disabled={isLoading}
-            error={formErrors['confirmPassword']}
+            error={formErrors.confirmPassword}
             label="Confirm Password"
             name="confirmPassword"
             onChange={handleInputChange}
             placeholder="Confirm your password"
             required
             type="password"
-            value={formData['confirmPassword']}
+            value={formData.confirmPassword}
           />
 
           <Button
@@ -162,7 +162,8 @@ export function RegisterForm() {
         </form>
 
         <Text className="mt-4 text-center text-gray-600" variant="small">
-          Already have an account?{' '}
+          Already have an account?
+          {' '}
           <Link className="font-medium" to="/login">
             Sign in
           </Link>

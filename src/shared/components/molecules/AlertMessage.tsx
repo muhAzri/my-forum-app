@@ -1,4 +1,6 @@
-import { AlertCircle, CheckCircle, Info, XCircle, X } from 'lucide-react';
+import {
+  AlertCircle, CheckCircle, Info, XCircle, X,
+} from 'lucide-react';
 import React from 'react';
 
 import { cn } from '../../utils/utils';

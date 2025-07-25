@@ -1,4 +1,6 @@
-import { MessageCircle, ThumbsUp, ThumbsDown, User as UserIcon, Calendar } from 'lucide-react';
+import {
+  MessageCircle, ThumbsUp, ThumbsDown, User as UserIcon, Calendar,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import type { Thread, User } from '../../../shared/types/forum';
@@ -86,7 +88,8 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
               return 'text-muted-foreground';
             })()}`}
           >
-            {voteScore > 0 ? '+' : ''}{voteScore}
+            {voteScore > 0 ? '+' : ''}
+            {voteScore}
           </div>
           <div className="text-xs text-muted-foreground">votes</div>
         </div>

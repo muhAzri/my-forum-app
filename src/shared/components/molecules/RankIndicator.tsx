@@ -27,14 +27,15 @@ function RankIndicator({ rank, size = 'md', className }: RankIndicatorProps) {
   const getRankIcon = () => {
     if (rank === 1) {
       return <Icon className={cn(sizeClasses[size], 'text-yellow-500')} icon={Trophy} />;
-    } else if (rank === 2) {
+    } if (rank === 2) {
       return <Icon className={cn(sizeClasses[size], 'text-gray-400')} icon={Trophy} />;
-    } else if (rank === 3) {
+    } if (rank === 3) {
       return <Icon className={cn(sizeClasses[size], 'text-amber-600')} icon={Trophy} />;
     }
     return (
       <Text className={cn(textSizes[size], 'text-gray-600')} variant="body" weight="bold">
-        #{rank}
+        #
+        {rank}
       </Text>
     );
   };

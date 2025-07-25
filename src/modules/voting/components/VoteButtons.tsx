@@ -17,7 +17,9 @@ export function VoteButtons({
 }: VotingProps) {
   const { user, token } = useSelector((state: RootState) => state.auth);
   const isAuthenticated = !!token;
-  const { getVoteState, voteOnThread, voteOnComment, toggleVote, isVoting, canVote } = useVoting();
+  const {
+    getVoteState, voteOnThread, voteOnComment, toggleVote, isVoting, canVote,
+  } = useVoting();
 
   const voteState = getVoteState(itemId, upVotesBy, downVotesBy, user?.id);
 
@@ -90,8 +92,8 @@ export function VoteButtons({
   return (
     <div className="flex items-center space-x-2">
       <Button
-        className={voteState.currentVote === 'up' 
-          ? 'text-success hover:text-success hover:bg-success/10 transition-colors' 
+        className={voteState.currentVote === 'up'
+          ? 'text-success hover:text-success hover:bg-success/10 transition-colors'
           : 'text-muted-foreground hover:text-success hover:bg-success/10 transition-colors'}
         disabled={isVoting}
         onClick={() => handleVote('up')}
@@ -115,8 +117,8 @@ export function VoteButtons({
       </span>
 
       <Button
-        className={voteState.currentVote === 'down' 
-          ? 'text-error hover:text-error hover:bg-destructive/10 transition-colors' 
+        className={voteState.currentVote === 'down'
+          ? 'text-error hover:text-error hover:bg-destructive/10 transition-colors'
           : 'text-muted-foreground hover:text-error hover:bg-destructive/10 transition-colors'}
         disabled={isVoting}
         onClick={() => handleVote('down')}

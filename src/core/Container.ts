@@ -16,6 +16,7 @@ export interface RegisterOptions {
 
 export class Container implements IContainer {
   private services = new Map<string, ServiceRegistration>();
+
   private singletonInstances = new Map<string, unknown>();
 
   register<T>(key: string, definition: ServiceDefinition<T>, options: RegisterOptions = {}): void {

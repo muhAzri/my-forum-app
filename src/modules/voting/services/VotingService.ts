@@ -48,21 +48,20 @@ export class VotingService implements IVotingService {
 
     if (itemType === 'thread') {
       return `${this.baseURL}/threads/${threadId}/${voteAction}`;
-    } else {
-      return `${this.baseURL}/threads/${threadId}/comments/${commentId}/${voteAction}`;
     }
+    return `${this.baseURL}/threads/${threadId}/comments/${commentId}/${voteAction}`;
   }
 
   private getVoteAction(voteType?: VoteType): string {
     switch (voteType) {
-    case 'up':
-      return 'up-vote';
-    case 'down':
-      return 'down-vote';
-    case 'neutral':
-      return 'neutral-vote';
-    default:
-      return 'neutral-vote';
+      case 'up':
+        return 'up-vote';
+      case 'down':
+        return 'down-vote';
+      case 'neutral':
+        return 'neutral-vote';
+      default:
+        return 'neutral-vote';
     }
   }
 }

@@ -12,12 +12,14 @@ export interface FormFieldProps extends Omit<InputProps, 'error'> {
 }
 
 const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
-  ({ label, error, required, helperText, className, ...props }, ref) => (
+  ({
+    label, error, required, helperText, className, ...props
+  }, ref) => (
     <div className="space-y-2">
       {label && (
-        <Label htmlFor={props.id} required={required}>
-          {label}
-        </Label>
+      <Label htmlFor={props.id} required={required}>
+        {label}
+      </Label>
       )}
       <Input
         ref={ref}
@@ -26,14 +28,14 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
         {...props}
       />
       {error && (
-        <Text className="text-destructive" variant="small">
-          {error}
-        </Text>
+      <Text className="text-destructive" variant="small">
+        {error}
+      </Text>
       )}
       {helperText && !error && (
-        <Text variant="muted">
-          {helperText}
-        </Text>
+      <Text variant="muted">
+        {helperText}
+      </Text>
       )}
     </div>
   ),

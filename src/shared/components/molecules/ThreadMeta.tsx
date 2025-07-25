@@ -38,7 +38,9 @@ function ThreadMeta({
         <div className="flex items-center gap-1">
           <Icon className="text-muted-foreground" icon={MessageSquare} size="xs" />
           <Text variant="muted">
-            {commentCount} {commentCount === 1 ? 'comment' : 'comments'}
+            {commentCount}
+            {' '}
+            {commentCount === 1 ? 'comment' : 'comments'}
           </Text>
         </div>
       )}

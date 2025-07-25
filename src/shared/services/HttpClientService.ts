@@ -5,7 +5,9 @@ import type { INavigationService } from '../types/INavigationService';
 
 export class HttpClientService {
   private readonly client: AxiosInstance;
+
   private readonly authService: IAuthService;
+
   private readonly navigationService: INavigationService;
 
   constructor(

@@ -8,12 +8,14 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, label, error, ...props }, ref) => (
+  ({
+    className, type, label, error, ...props
+  }, ref) => (
     <div className="space-y-2">
       {label && (
-        <label className="text-sm font-medium text-foreground">
-          {label}
-        </label>
+      <label className="text-sm font-medium text-foreground">
+        {label}
+      </label>
       )}
       <input
         ref={ref}
@@ -30,7 +32,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {...props}
       />
       {error && (
-        <p className="text-sm text-destructive">{error}</p>
+      <p className="text-sm text-destructive">{error}</p>
       )}
     </div>
   ),

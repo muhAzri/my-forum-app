@@ -5,7 +5,6 @@ import type { RootState } from '../../../core/store';
 import { SafeHtml } from '../../../shared/components/ui/safe-html';
 import type { Comment } from '../../../shared/types/forum';
 import { formatTimeAgo } from '../../../shared/utils/utils';
-
 import { VoteButtons } from '../../voting/components/VoteButtons';
 
 interface CommentCardProps {
@@ -15,7 +14,6 @@ interface CommentCardProps {
 
 export function CommentCard({ comment, threadId }: CommentCardProps) {
   const { user } = useSelector((state: RootState) => state.auth);
-
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">

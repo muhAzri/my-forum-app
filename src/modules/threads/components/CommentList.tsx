@@ -1,4 +1,3 @@
-
 import type { Comment } from '../../../shared/types/forum';
 
 import { CommentCard } from './CommentCard';

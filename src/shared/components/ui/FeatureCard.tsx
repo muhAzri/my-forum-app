@@ -13,7 +13,9 @@ interface FeatureCardProps {
 }
 
 export function FeatureCard({ data }: FeatureCardProps) {
-  const { title, description, content, buttonText, buttonVariant = 'default', onButtonClick } = data;
+  const {
+    title, description, content, buttonText, buttonVariant = 'default', onButtonClick,
+  } = data;
 
   const footer = (
     <CardFooter>

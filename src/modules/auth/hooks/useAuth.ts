@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import { container } from '../../../core/Container';
-import type { IAuthService, LoginCredentials, RegisterData, AuthState } from '../types/AuthTypes';
+import type {
+  IAuthService, LoginCredentials, RegisterData, AuthState,
+} from '../types/AuthTypes';
 
 export function useAuth() {
   const [state, setState] = useState<AuthState>({

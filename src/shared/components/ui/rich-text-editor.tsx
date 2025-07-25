@@ -21,7 +21,7 @@ interface RichTextEditorProps {
 
 const modules = {
   toolbar: [
-    [{ 'header': [1, 2, 3, false] }],
+    [{ header: [1, 2, 3, false] }],
     ['bold', 'italic', 'underline'],
     ['blockquote'],
     ['clean'],

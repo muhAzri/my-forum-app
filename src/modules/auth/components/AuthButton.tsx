@@ -12,7 +12,9 @@ import Text from '../../../shared/components/atoms/Text';
 
 export function AuthButton() {
   const dispatch = useDispatch<AppDispatch>();
-  const { user, token, isInitialized, isLoading } = useSelector((state: RootState) => state.auth);
+  const {
+    user, token, isInitialized, isLoading,
+  } = useSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());

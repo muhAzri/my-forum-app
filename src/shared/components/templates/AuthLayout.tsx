@@ -55,7 +55,8 @@ function AuthLayout({
           <div className="mt-6 text-center">
             {footerText && (
               <Text className="text-gray-600" variant="body">
-                {footerText}{' '}
+                {footerText}
+                {' '}
                 {footerLink && (
                   <Link className="font-medium" to={footerLink.to}>
                     {footerLink.text}

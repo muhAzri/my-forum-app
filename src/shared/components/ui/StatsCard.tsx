@@ -19,7 +19,10 @@ export function StatsCard({ data }: StatsCardProps) {
       <div className="space-y-2">
         {stats.map((stat) => (
           <div key={stat.label} className="flex justify-between">
-            <span>{stat.label}:</span>
+            <span>
+              {stat.label}
+              :
+            </span>
             <span className="font-semibold">{stat.value}</span>
           </div>
         ))}

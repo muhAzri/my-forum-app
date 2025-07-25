@@ -35,9 +35,7 @@ export function Select({
   const selectedOption = options.find((option) => option.value === value);
 
   const filteredOptions = searchable && searchQuery
-    ? options.filter((option) =>
-      option.label.toLowerCase().includes(searchQuery.toLowerCase()),
-    )
+    ? options.filter((option) => option.label.toLowerCase().includes(searchQuery.toLowerCase()))
     : options;
 
   useEffect(() => {

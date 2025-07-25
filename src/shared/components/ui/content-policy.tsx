@@ -12,7 +12,9 @@ export function ContentPolicy() {
             <div className="flex items-start space-x-2">
               <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
               <div>
-                <strong>Safe HTML Support:</strong> Basic formatting like bold, italic,
+                <strong>Safe HTML Support:</strong>
+                {' '}
+                Basic formatting like bold, italic,
                 headers, underline, and blockquotes are supported.
               </div>
             </div>
@@ -20,15 +22,22 @@ export function ContentPolicy() {
             <div className="flex items-start space-x-2">
               <AlertTriangle className="h-4 w-4 mt-0.5 flex-shrink-0" />
               <div>
-                <strong>Automatic Sanitization:</strong> All content is automatically
+                <strong>Automatic Sanitization:</strong>
+                {' '}
+                All content is automatically
                 cleaned to prevent security issues. Scripts, forms, and potentially
                 harmful content are removed.
               </div>
             </div>
 
             <div className="text-xs text-blue-600 border-t border-blue-200 pt-2 mt-3">
-              <strong>Allowed:</strong> Headers (H1-H3), bold, italic, underline, blockquotes<br />
-              <strong>Blocked:</strong> Scripts, forms, iframes, style attributes, event handlers,
+              <strong>Allowed:</strong>
+              {' '}
+              Headers (H1-H3), bold, italic, underline, blockquotes
+              <br />
+              <strong>Blocked:</strong>
+              {' '}
+              Scripts, forms, iframes, style attributes, event handlers,
               lists, links
             </div>
           </div>

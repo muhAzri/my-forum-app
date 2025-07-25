@@ -3,6 +3,7 @@ import type { IStorageService } from '../types/IStorageService';
 
 export class AuthService implements IAuthService {
   private readonly TOKEN_KEY = 'authToken';
+
   private readonly storageService: IStorageService;
 
   constructor(storageService: IStorageService) {

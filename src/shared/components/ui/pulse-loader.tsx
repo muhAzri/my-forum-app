@@ -63,7 +63,9 @@ interface LoadingCardProps {
   className?: string;
 }
 
-export function LoadingCard({ title, description, progress, className }: LoadingCardProps) {
+export function LoadingCard({
+  title, description, progress, className,
+}: LoadingCardProps) {
   return (
     <div className={cn(
       'bg-white rounded-lg shadow-sm border border-gray-200 p-6 text-center',
