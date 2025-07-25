@@ -1,13 +1,13 @@
-import { MessageCircle, ThumbsUp, ThumbsDown, User, Calendar } from 'lucide-react';
+import { MessageCircle, ThumbsUp, ThumbsDown, User as UserIcon, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import type { Thread } from '../../../shared/types/forum';
+import type { Thread, User } from '../../../shared/types/forum';
 import { createExcerpt } from '../../../shared/utils/sanitize';
 import { formatTimeAgo, capitalizeCategory } from '../../../shared/utils/utils';
 
 interface ThreadCardProps {
   thread: Thread;
-  author?: { name: string; avatar?: string };
+  author?: User;
 }
 
 export function ThreadCard({ thread, author }: ThreadCardProps) {
@@ -51,7 +51,7 @@ export function ThreadCard({ thread, author }: ThreadCardProps) {
                 />
               ) : (
                 <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center">
-                  <User className="w-3 h-3 text-muted-foreground" />
+                  <UserIcon className="w-3 h-3 text-muted-foreground" />
                 </div>
               )}
               <span className="text-sm text-muted-foreground">{author?.name ?? 'Unknown User'}</span>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import { fetchThreads, setSelectedCategory } from '../../../core/store/slices/threadsSlice';
+import { fetchUsers } from '../../../core/store/slices/usersSlice';
 import { Button } from '../../../shared/components/ui/button';
 import { LoadingCard, TypingLoader } from '../../../shared/components/ui/pulse-loader';
 import { ThreadCardSkeleton } from '../../../shared/components/ui/skeleton';
@@ -22,9 +23,11 @@ export function ThreadList() {
     error,
   } = useSelector((state: RootState) => state.threads);
   const { token, user } = useSelector((state: RootState) => state.auth);
+  const { users } = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
     dispatch(fetchThreads());
+    dispatch(fetchUsers());
   }, [dispatch]);
 
   const filteredThreads = useMemo(() => {
@@ -128,12 +131,16 @@ export function ThreadList() {
               </div>
             </div>
           )}
-          {filteredThreads.map((thread) => (
-            <ThreadCard
-              key={thread.id}
-              thread={thread}
-            />
-          ))}
+          {filteredThreads.map((thread) => {
+            const author = users.find((u) => u.id === thread.ownerId);
+            return (
+              <ThreadCard
+                key={thread.id}
+                thread={thread}
+                {...(author && { author })}
+              />
+            );
+          })}
         </div>
       )}
     </div>
