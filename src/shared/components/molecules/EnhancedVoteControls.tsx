@@ -51,11 +51,9 @@ function EnhancedVoteControls({
     const finalVoteType = currentVote === voteType ? 'neutral' : voteType;
     const userId = user.id;
 
-    // Store previous state for potential rollback
     const previousUpVotes = [...upVotesBy];
     const previousDownVotes = [...downVotesBy];
 
-    // Apply optimistic update immediately
     if (itemType === 'thread') {
       dispatch(optimisticVoteThread({
         threadId: itemId,
@@ -63,14 +61,12 @@ function EnhancedVoteControls({
         userId,
       }));
 
-      // Dispatch the async action
       try {
         await dispatch(voteThread({
           threadId: itemId,
           voteType: finalVoteType,
         })).unwrap();
       } catch {
-        // Rollback on error
         dispatch(rollbackVoteThread({
           threadId: itemId,
           previousUpVotes,
@@ -84,7 +80,6 @@ function EnhancedVoteControls({
         userId,
       }));
 
-      // Dispatch the async action
       try {
         await dispatch(voteComment({
           threadId: itemId,
@@ -92,7 +87,6 @@ function EnhancedVoteControls({
           voteType: finalVoteType,
         })).unwrap();
       } catch {
-        // Rollback on error
         dispatch(rollbackVoteComment({
           commentId,
           previousUpVotes,

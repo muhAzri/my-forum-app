@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -7,7 +6,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary colors
         primary: {
           50: 'var(--color-primary-50)',
           100: 'var(--color-primary-100)',
@@ -22,7 +20,6 @@ export default {
           DEFAULT: 'var(--color-primary-600)',
           foreground: 'var(--color-primary-foreground)',
         },
-        // Gray colors
         gray: {
           50: 'var(--color-gray-50)',
           100: 'var(--color-gray-100)',
@@ -35,7 +32,6 @@ export default {
           800: 'var(--color-gray-800)',
           900: 'var(--color-gray-900)',
         },
-        // Semantic colors
         success: {
           50: 'var(--color-success-50)',
           100: 'var(--color-success-100)',
@@ -59,7 +55,6 @@ export default {
           600: 'var(--color-warning-600)',
           DEFAULT: 'var(--color-warning-600)',
         },
-        // UI semantic colors
         background: 'var(--color-background)',
         foreground: 'var(--color-foreground)',
         card: {

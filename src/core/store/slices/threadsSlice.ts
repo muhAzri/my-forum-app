@@ -332,14 +332,12 @@ const threadsSlice = createSlice({
         state.error = action.error.message ?? 'Failed to create comment';
       })
       .addCase(voteThread.fulfilled, (state) => {
-        // Vote was successfully applied optimistically, no additional changes needed
         state.error = null;
       })
       .addCase(voteThread.rejected, (state, action) => {
         state.error = action.error.message ?? 'Failed to vote on thread';
       })
       .addCase(voteComment.fulfilled, (state) => {
-        // Vote was successfully applied optimistically, no additional changes needed
         state.error = null;
       })
       .addCase(voteComment.rejected, (state, action) => {

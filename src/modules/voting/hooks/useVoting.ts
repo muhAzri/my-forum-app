@@ -59,18 +59,15 @@ export function useVoting() {
       throw new Error('You must be logged in to vote');
     }
 
-    // Store previous state for rollback
     const previousUpVotes = [...currentUpVotes];
     const previousDownVotes = [...currentDownVotes];
 
-    // Apply optimistic update immediately
     dispatch(optimisticVoteThread({ threadId, voteType, userId: user.id }));
 
     try {
       setIsVoting(true);
       await votingService.voteOnThread(threadId, voteType);
     } catch (error) {
-      // Rollback on error
       dispatch(rollbackVoteThread({ threadId, previousUpVotes, previousDownVotes }));
       throw error;
     } finally {
@@ -89,18 +86,15 @@ export function useVoting() {
       throw new Error('You must be logged in to vote');
     }
 
-    // Store previous state for rollback
     const previousUpVotes = [...currentUpVotes];
     const previousDownVotes = [...currentDownVotes];
 
-    // Apply optimistic update immediately
     dispatch(optimisticVoteComment({ commentId, voteType, userId: user.id }));
 
     try {
       setIsVoting(true);
       await votingService.voteOnComment(threadId, commentId, voteType);
     } catch (error) {
-      // Rollback on error
       dispatch(rollbackVoteComment({ commentId, previousUpVotes, previousDownVotes }));
       throw error;
     } finally {

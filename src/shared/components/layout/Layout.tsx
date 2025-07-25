@@ -19,13 +19,11 @@ export function Layout() {
               Forum App
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-4">
               <NavigationBar items={navigationItems} />
               <AuthButton />
             </div>
 
-            {/* Mobile menu button */}
             <button
               className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -39,7 +37,6 @@ export function Layout() {
             </button>
           </div>
 
-          {/* Mobile Navigation Menu */}
           {isMobileMenuOpen && (
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">

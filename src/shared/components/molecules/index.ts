@@ -1,5 +1,3 @@
-// Atomic Design - Molecules
-// Groups of atoms functioning together
 export { default as FormField } from './FormField';
 export { default as SearchBox } from './SearchBox';
 export { default as UserInfo } from './UserInfo';

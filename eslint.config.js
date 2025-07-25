@@ -8,7 +8,6 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
-// mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -20,13 +19,10 @@ const compat = new FlatCompat({
 export default [
   { ignores: ['dist', 'node_modules', '*.config.js', '*.config.ts'] },
   
-  // Base JavaScript recommended config
   js.configs.recommended,
   
-  // TypeScript ESLint recommended configs
   ...tseslint.configs.recommended,
   
-  // Use FlatCompat to extend Airbnb configs (without airbnb-typescript for now)
   ...compat.extends(
     'airbnb',
     'airbnb/hooks',
@@ -61,38 +57,29 @@ export default [
       },
     },
     rules: {
-      // React Hooks rules
       ...reactHooks.configs.recommended.rules,
-      // React Refresh
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       
-      // React 17+ doesn't need React import
       'react/react-in-jsx-scope': 'off',
       'react/jsx-uses-react': 'off',
       
-      // Allow JSX in .tsx files
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       
-      // Allow props spreading for flexibility
       'react/jsx-props-no-spreading': 'off',
       
-      // Use function declarations for named components
       'react/function-component-definition': ['error', {
         namedComponents: 'function-declaration',
         unnamedComponents: 'arrow-function',
       }],
       
-      // TypeScript handles prop validation
       'react/prop-types': 'off',
       'react/require-default-props': 'off',
       
-      // Allow Redux Toolkit state mutations
       'no-param-reassign': ['error', { 
         props: true,
         ignorePropertyModificationsFor: ['state'],
       }],
       
-      // TypeScript specific rules
       '@typescript-eslint/no-unused-vars': ['error', { 
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
@@ -109,13 +96,11 @@ export default [
       '@typescript-eslint/prefer-optional-chain': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       
-      // Relax some strict rules for development
       'class-methods-use-this': 'off',
       'max-classes-per-file': ['error', 5],
       'jsx-a11y/label-has-associated-control': 'off',
       'react/no-unused-prop-types': 'off',
       
-      // Import rules
       'import/prefer-default-export': 'off',
       'import/extensions': ['error', 'ignorePackages', {
         js: 'never',
@@ -124,7 +109,6 @@ export default [
         tsx: 'never',
       }],
       
-      // Consistent import ordering
       'import/order': ['error', {
         groups: [
           'builtin',
@@ -141,11 +125,9 @@ export default [
         },
       }],
       
-      // Console warnings instead of errors in development
       'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       
-      // Line length
       'max-len': ['error', { 
         code: 100, 
         ignoreUrls: true, 
@@ -157,7 +139,6 @@ export default [
     },
   },
   
-  // Overrides for specific file patterns
   {
     files: ['*.js', '*.jsx'],
     rules: {

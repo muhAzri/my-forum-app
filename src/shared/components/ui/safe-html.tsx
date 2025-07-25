@@ -30,11 +30,9 @@ export function SafeHtml({ html, className }: SafeHtmlProps) {
           'safe-html-content',
           className,
         )}
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
       />
 
-      {/* Match Quill editor styling exactly */}
       <style>
         {`
         .safe-html-content blockquote {
