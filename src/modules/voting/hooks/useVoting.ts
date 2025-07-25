@@ -1,12 +1,16 @@
 import { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { container } from '../../../core/Container';
-import { useAuthContext } from '../../auth/hooks/useAuthContext';
+import type { RootState } from '../../../core/store';
+import { optimisticVoteThread, optimisticVoteComment, rollbackVoteThread, rollbackVoteComment } from '../../../core/store/slices/threadsSlice';
 import type { IVotingService, VoteType, VoteState } from '../types/VotingTypes';
 
 export function useVoting() {
   const [isVoting, setIsVoting] = useState(false);
-  const { user, isAuthenticated } = useAuthContext();
+  const { user, token } = useSelector((state: RootState) => state.auth);
+  const isAuthenticated = !!token;
+  const dispatch = useDispatch();
 
   const votingService = container.resolve<IVotingService>('VotingService');
 
@@ -43,35 +47,64 @@ export function useVoting() {
     };
   }, [user?.id]);
 
-  const voteOnThread = useCallback(async (threadId: string, voteType: VoteType) => {
-    if (!isAuthenticated) {
+  const voteOnThread = useCallback(async (
+    threadId: string, 
+    voteType: VoteType, 
+    currentUpVotes: string[], 
+    currentDownVotes: string[]
+  ) => {
+    if (!isAuthenticated || !user?.id) {
       throw new Error('You must be logged in to vote');
     }
+
+    // Store previous state for rollback
+    const previousUpVotes = [...currentUpVotes];
+    const previousDownVotes = [...currentDownVotes];
+    
+    // Apply optimistic update immediately
+    dispatch(optimisticVoteThread({ threadId, voteType, userId: user.id }));
 
     try {
       setIsVoting(true);
       await votingService.voteOnThread(threadId, voteType);
+    } catch (error) {
+      // Rollback on error
+      dispatch(rollbackVoteThread({ threadId, previousUpVotes, previousDownVotes }));
+      throw error;
     } finally {
       setIsVoting(false);
     }
-  }, [votingService, isAuthenticated]);
+  }, [votingService, isAuthenticated, user?.id, dispatch]);
 
   const voteOnComment = useCallback(async (
     threadId: string,
     commentId: string,
     voteType: VoteType,
+    currentUpVotes: string[],
+    currentDownVotes: string[]
   ) => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !user?.id) {
       throw new Error('You must be logged in to vote');
     }
+
+    // Store previous state for rollback
+    const previousUpVotes = [...currentUpVotes];
+    const previousDownVotes = [...currentDownVotes];
+    
+    // Apply optimistic update immediately
+    dispatch(optimisticVoteComment({ commentId, voteType, userId: user.id }));
 
     try {
       setIsVoting(true);
       await votingService.voteOnComment(threadId, commentId, voteType);
+    } catch (error) {
+      // Rollback on error
+      dispatch(rollbackVoteComment({ commentId, previousUpVotes, previousDownVotes }));
+      throw error;
     } finally {
       setIsVoting(false);
     }
-  }, [votingService, isAuthenticated]);
+  }, [votingService, isAuthenticated, user?.id, dispatch]);
 
   const toggleVote = useCallback((
     currentVote: VoteType | null,

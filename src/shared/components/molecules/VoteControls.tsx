@@ -1,5 +1,4 @@
-import { ChevronUp, ChevronDown } from 'lucide-react';
-import React from 'react';
+import { ThumbsUp, ThumbsDown } from 'lucide-react';
 
 import { cn } from '../../utils/utils';
 import Button from '../atoms/Button';
@@ -50,7 +49,7 @@ function VoteControls({
         size={buttonSize}
         variant={userVote === 1 ? 'default' : 'ghost'}
       >
-        <Icon icon={ChevronUp} size={size === 'sm' ? 'sm' : 'md'} />
+        <Icon icon={ThumbsUp} size={size === 'sm' ? 'sm' : 'md'} />
       </Button>
 
       <Text
@@ -74,7 +73,7 @@ function VoteControls({
         size={buttonSize}
         variant={userVote === -1 ? 'default' : 'ghost'}
       >
-        <Icon icon={ChevronDown} size={size === 'sm' ? 'sm' : 'md'} />
+        <Icon icon={ThumbsDown} size={size === 'sm' ? 'sm' : 'md'} />
       </Button>
     </div>
   );

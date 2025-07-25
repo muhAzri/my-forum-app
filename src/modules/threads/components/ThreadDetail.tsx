@@ -9,9 +9,9 @@ import { SafeHtml } from '../../../shared/components/ui/safe-html';
 import { ThreadDetailSkeleton } from '../../../shared/components/ui/skeleton';
 import { formatTimeAgo, capitalizeCategory } from '../../../shared/utils/utils';
 
+import { VoteButtons } from '../../voting/components/VoteButtons';
 import { CommentList } from './CommentList';
 import { CreateCommentForm } from './CreateCommentForm';
-import { VoteButtons } from './VoteButtons';
 
 export function ThreadDetail() {
   const { id } = useParams<{ id: string }>();
@@ -49,15 +49,6 @@ export function ThreadDetail() {
     );
   }
 
-  const voteScore = currentThread.upVotesBy.length - currentThread.downVotesBy.length;
-  let userVote: 'up' | 'down' | null = null;
-  if (user) {
-    if (currentThread.upVotesBy.includes(user.id)) {
-      userVote = 'up';
-    } else if (currentThread.downVotesBy.includes(user.id)) {
-      userVote = 'down';
-    }
-  }
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
@@ -103,10 +94,8 @@ export function ThreadDetail() {
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 py-4 border-t border-border">
           <VoteButtons
-            currentVote={userVote}
             itemId={currentThread.id}
             itemType="thread"
-            voteCount={voteScore}
             upVotesBy={currentThread.upVotesBy}
             downVotesBy={currentThread.downVotesBy}
           />

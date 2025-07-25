@@ -1,8 +1,9 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import type { RootState } from '../../../core/store';
 import { Button } from '../../../shared/components/ui/button';
-import { useAuthContext } from '../../auth/hooks/useAuthContext';
 import { useVoting } from '../hooks/useVoting';
 import type { VotingProps } from '../types/VotingTypes';
 
@@ -14,7 +15,8 @@ export function VoteButtons({
   downVotesBy,
   onVoteSuccess,
 }: VotingProps) {
-  const { user, isAuthenticated } = useAuthContext();
+  const { user, token } = useSelector((state: RootState) => state.auth);
+  const isAuthenticated = !!token;
   const { getVoteState, voteOnThread, voteOnComment, toggleVote, isVoting, canVote } = useVoting();
 
   const voteState = getVoteState(itemId, upVotesBy, downVotesBy, user?.id);
@@ -27,9 +29,9 @@ export function VoteButtons({
     const finalVoteType = toggleVote(voteState.currentVote, clickedVoteType);
 
     if (itemType === 'thread') {
-      voteOnThread(itemId, finalVoteType).then(() => onVoteSuccess?.());
+      voteOnThread(itemId, finalVoteType, upVotesBy, downVotesBy).then(() => onVoteSuccess?.());
     } else if (itemType === 'comment' && threadId) {
-      voteOnComment(threadId, itemId, finalVoteType).then(() => onVoteSuccess?.());
+      voteOnComment(threadId, itemId, finalVoteType, upVotesBy, downVotesBy).then(() => onVoteSuccess?.());
     }
   };
 
@@ -38,7 +40,7 @@ export function VoteButtons({
       <div className="flex items-center space-x-2">
         <div className="flex items-center space-x-2">
           <Button
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-muted-foreground cursor-not-allowed opacity-50"
             disabled
             size="sm"
             title="Login to vote"
@@ -61,7 +63,7 @@ export function VoteButtons({
           </span>
 
           <Button
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-muted-foreground cursor-not-allowed opacity-50"
             disabled
             size="sm"
             title="Login to vote"
@@ -88,7 +90,9 @@ export function VoteButtons({
   return (
     <div className="flex items-center space-x-2">
       <Button
-        className={voteState.currentVote === 'up' ? 'text-success hover:text-success' : 'text-muted-foreground hover:text-foreground'}
+        className={voteState.currentVote === 'up' 
+          ? 'text-success hover:text-success hover:bg-success/10 transition-colors' 
+          : 'text-muted-foreground hover:text-success hover:bg-success/10 transition-colors'}
         disabled={isVoting}
         onClick={() => handleVote('up')}
         size="sm"
@@ -111,7 +115,9 @@ export function VoteButtons({
       </span>
 
       <Button
-        className={voteState.currentVote === 'down' ? 'text-error hover:text-error' : 'text-muted-foreground hover:text-foreground'}
+        className={voteState.currentVote === 'down' 
+          ? 'text-error hover:text-error hover:bg-destructive/10 transition-colors' 
+          : 'text-muted-foreground hover:text-error hover:bg-destructive/10 transition-colors'}
         disabled={isVoting}
         onClick={() => handleVote('down')}
         size="sm"

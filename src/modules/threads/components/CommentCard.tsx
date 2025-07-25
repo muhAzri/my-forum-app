@@ -1,4 +1,4 @@
-import { Calendar, ThumbsDown, ThumbsUp, User } from 'lucide-react';
+import { Calendar, User } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 import type { RootState } from '../../../core/store';
@@ -6,7 +6,7 @@ import { SafeHtml } from '../../../shared/components/ui/safe-html';
 import type { Comment } from '../../../shared/types/forum';
 import { formatTimeAgo } from '../../../shared/utils/utils';
 
-import { VoteButtons } from './VoteButtons';
+import { VoteButtons } from '../../voting/components/VoteButtons';
 
 interface CommentCardProps {
   comment: Comment;
@@ -16,15 +16,6 @@ interface CommentCardProps {
 export function CommentCard({ comment, threadId }: CommentCardProps) {
   const { user } = useSelector((state: RootState) => state.auth);
 
-  const voteScore = comment.upVotesBy.length - comment.downVotesBy.length;
-  let userVote: 'up' | 'down' | null = null;
-  if (user) {
-    if (comment.upVotesBy.includes(user.id)) {
-      userVote = 'up';
-    } else if (comment.downVotesBy.includes(user.id)) {
-      userVote = 'down';
-    }
-  }
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
@@ -58,25 +49,13 @@ export function CommentCard({ comment, threadId }: CommentCardProps) {
 
       <div className="flex items-center justify-between">
         <VoteButtons
-          commentId={comment.id}
-          currentVote={userVote}
-          itemId={threadId}
+          itemId={comment.id}
           itemType="comment"
-          voteCount={voteScore}
+          threadId={threadId}
           upVotesBy={comment.upVotesBy}
           downVotesBy={comment.downVotesBy}
         />
 
-        <div className="flex items-center space-x-4 text-sm text-gray-500">
-          <div className="flex items-center space-x-1">
-            <ThumbsUp className="w-3 h-3" />
-            <span>{comment.upVotesBy.length}</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <ThumbsDown className="w-3 h-3" />
-            <span>{comment.downVotesBy.length}</span>
-          </div>
-        </div>
       </div>
     </div>
   );
