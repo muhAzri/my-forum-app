@@ -29,7 +29,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Run linter
-        run: npm run lint
+        run: npm run lint && exit 1
 
       - name: Run type check
         run: npx tsc --noEmit
