@@ -66,6 +66,9 @@ export const fetchCurrentUser = createAsyncThunk(
     });
 
     if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Unauthorized - token expired');
+      }
       throw new Error('Failed to fetch user');
     }
 
@@ -132,7 +135,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message ?? 'Failed to fetch user';
         state.isInitialized = true;
-        if (action.error.message === 'No token available' || action.error.message?.includes('401')) {
+        if (action.error.message === 'No token available' || action.error.message === 'Unauthorized - token expired') {
           state.token = null;
           state.user = null;
           localStorage.removeItem('token');

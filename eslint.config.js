@@ -128,6 +128,8 @@ export default [
       'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       
+      'dot-notation': 'off',
+      
       'max-len': ['error', { 
         code: 100, 
         ignoreUrls: true, 
@@ -143,6 +145,24 @@ export default [
     files: ['*.js', '*.jsx'],
     rules: {
       '@typescript-eslint/no-var-requires': 'off',
+    },
+  },
+  
+  {
+    files: ['**/*.test.{ts,tsx,js,jsx}', '**/__tests__/**/*.{ts,tsx,js,jsx}', '**/test/**/*.{ts,tsx,js,jsx}', '**/*.d.ts', '**/e2e/**/*.{ts,tsx}', '**/dev/**/*.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+      },
+    },
+    rules: {
+      'import/no-extraneous-dependencies': ['error', { 
+        devDependencies: true,
+      }],
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-console': 'off',
     },
   },
 ];

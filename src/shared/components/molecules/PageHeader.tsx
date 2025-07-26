@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { cn } from '../../utils/utils';
 import Button from '../atoms/Button';
 import Heading from '../atoms/Heading';

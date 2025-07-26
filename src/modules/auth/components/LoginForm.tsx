@@ -29,13 +29,13 @@ export function LoginForm() {
     const errors: Record<string, string> = {};
 
     if (!formData.email) {
-      errors.email = 'Email is required';
+      errors['email'] = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'Email is invalid';
+      errors['email'] = 'Email is invalid';
     }
 
     if (!formData.password) {
-      errors.password = 'Password is required';
+      errors['password'] = 'Password is required';
     }
 
     setFormErrors(errors);
@@ -78,10 +78,11 @@ export function LoginForm() {
           </AlertMessage>
         )}
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form className="space-y-4" noValidate onSubmit={handleSubmit}>
           <FormField
             disabled={isLoading}
-            error={formErrors.email}
+            error={formErrors['email']}
+            id="email"
             label="Email"
             name="email"
             onChange={handleInputChange}
@@ -93,7 +94,8 @@ export function LoginForm() {
 
           <FormField
             disabled={isLoading}
-            error={formErrors.password}
+            error={formErrors['password']}
+            id="password"
             label="Password"
             name="password"
             onChange={handleInputChange}

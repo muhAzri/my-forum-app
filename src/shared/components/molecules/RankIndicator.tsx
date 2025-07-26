@@ -1,5 +1,4 @@
 import { Trophy } from 'lucide-react';
-import React from 'react';
 
 import { cn } from '../../utils/utils';
 import Icon from '../atoms/Icon';

@@ -30,25 +30,25 @@ export function RegisterForm() {
     const errors: Record<string, string> = {};
 
     if (!formData.name) {
-      errors.name = 'Name is required';
+      errors['name'] = 'Name is required';
     }
 
     if (!formData.email) {
-      errors.email = 'Email is required';
+      errors['email'] = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'Email is invalid';
+      errors['email'] = 'Email is invalid';
     }
 
     if (!formData.password) {
-      errors.password = 'Password is required';
+      errors['password'] = 'Password is required';
     } else if (formData.password.length < 6) {
-      errors.password = 'Password must be at least 6 characters';
+      errors['password'] = 'Password must be at least 6 characters';
     }
 
     if (!formData.confirmPassword) {
-      errors.confirmPassword = 'Please confirm your password';
+      errors['confirmPassword'] = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
+      errors['confirmPassword'] = 'Passwords do not match';
     }
 
     setFormErrors(errors);
@@ -98,7 +98,7 @@ export function RegisterForm() {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <FormField
             disabled={isLoading}
-            error={formErrors.name}
+            error={formErrors['name']}
             label="Full Name"
             name="name"
             onChange={handleInputChange}
@@ -110,7 +110,7 @@ export function RegisterForm() {
 
           <FormField
             disabled={isLoading}
-            error={formErrors.email}
+            error={formErrors['email']}
             label="Email"
             name="email"
             onChange={handleInputChange}
@@ -122,7 +122,7 @@ export function RegisterForm() {
 
           <FormField
             disabled={isLoading}
-            error={formErrors.password}
+            error={formErrors['password']}
             helperText="Password must be at least 6 characters"
             label="Password"
             name="password"
@@ -135,7 +135,7 @@ export function RegisterForm() {
 
           <FormField
             disabled={isLoading}
-            error={formErrors.confirmPassword}
+            error={formErrors['confirmPassword']}
             label="Confirm Password"
             name="confirmPassword"
             onChange={handleInputChange}

@@ -3,11 +3,14 @@ import type {
 } from '../types/AuthTypes';
 
 export class AuthService implements IAuthService {
-  private readonly baseURL = 'https://forum-api.dicoding.dev/v1';
+  private readonly baseURL = import.meta.env['VITE_API_URL'];
 
   private token: string | null = null;
 
   constructor() {
+    if (!this.baseURL) {
+      throw new Error('VITE_API_URL environment variable is required');
+    }
     this.token = localStorage.getItem('token');
   }
 

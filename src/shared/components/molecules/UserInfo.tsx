@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { cn } from '../../utils/utils';
 import Avatar from '../atoms/Avatar';
 import Text from '../atoms/Text';

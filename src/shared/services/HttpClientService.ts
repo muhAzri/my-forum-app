@@ -13,8 +13,11 @@ export class HttpClientService {
   constructor(
     authService: IAuthService,
     navigationService: INavigationService,
-    baseURL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001/api',
+    baseURL = import.meta.env['VITE_API_URL'],
   ) {
+    if (!baseURL) {
+      throw new Error('VITE_API_URL environment variable is required');
+    }
     this.authService = authService;
     this.navigationService = navigationService;
     this.client = axios.create({
@@ -33,13 +36,8 @@ export class HttpClientService {
       (config: InternalAxiosRequestConfig) => {
         const token = this.authService.getToken();
         if (token && config.headers) {
-          return {
-            ...config,
-            headers: {
-              ...config.headers,
-              Authorization: `Bearer ${token}`,
-            },
-          };
+          // eslint-disable-next-line no-param-reassign
+          config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
       },

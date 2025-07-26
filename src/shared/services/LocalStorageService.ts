@@ -13,6 +13,7 @@ export class LocalStorageService implements IStorageService {
     try {
       localStorage.setItem(key, value);
     } catch {
+      /* noop */
     }
   }
 
@@ -20,6 +21,7 @@ export class LocalStorageService implements IStorageService {
     try {
       localStorage.removeItem(key);
     } catch {
+      /* noop */
     }
   }
 
@@ -27,6 +29,7 @@ export class LocalStorageService implements IStorageService {
     try {
       localStorage.clear();
     } catch {
+      /* noop */
     }
   }
 }

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Link from '../atoms/Link';
 import Text from '../atoms/Text';
 import {

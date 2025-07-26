@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { AppDispatch, RootState } from '../../../core/store';
@@ -127,7 +126,7 @@ function EnhancedVoteControls({
     );
   }
 
-  let userVote: number | null = null;
+  let userVote: 1 | -1 | null = null;
   if (currentVote === 'up') {
     userVote = 1;
   } else if (currentVote === 'down') {

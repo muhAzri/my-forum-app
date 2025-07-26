@@ -29,16 +29,16 @@ export function CreateThreadForm() {
     const errors: Record<string, string> = {};
 
     if (!formData.title.trim()) {
-      errors.title = 'Title is required';
+      errors['title'] = 'Title is required';
     }
 
     const bodyText = stripHtml(formData.body).trim();
     if (!bodyText) {
-      errors.body = 'Content is required';
+      errors['body'] = 'Content is required';
     }
 
     if (!formData.category.trim()) {
-      errors.category = 'Category is required';
+      errors['category'] = 'Category is required';
     }
 
     setFormErrors(errors);
@@ -84,7 +84,7 @@ export function CreateThreadForm() {
         <form className="space-y-6" onSubmit={handleSubmit}>
           <Input
             disabled={isCreating}
-            error={formErrors.title}
+            error={formErrors['title']}
             label="Title"
             name="title"
             onChange={handleInputChange}
@@ -119,20 +119,20 @@ export function CreateThreadForm() {
               <option value="News">News</option>
               <option value="Help">Help</option>
             </select>
-            {formErrors.category && (
-              <p className="text-sm text-red-600">{formErrors.category}</p>
+            {formErrors['category'] && (
+              <p className="text-sm text-red-600">{formErrors['category']}</p>
             )}
           </div>
 
           <RichTextEditor
             disabled={isCreating}
-            error={formErrors.body}
+            error={formErrors['body']}
             label="Content"
             maxHeight={500}
             minHeight={200}
             onChange={(value) => {
               setFormData((prev) => ({ ...prev, body: value }));
-              if (formErrors.body) {
+              if (formErrors['body']) {
                 setFormErrors((prev) => ({ ...prev, body: '' }));
               }
             }}

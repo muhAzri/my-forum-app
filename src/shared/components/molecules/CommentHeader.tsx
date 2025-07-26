@@ -1,5 +1,4 @@
 import { Calendar } from 'lucide-react';
-import React from 'react';
 
 import { cn } from '../../utils/utils';
 import Avatar from '../atoms/Avatar';

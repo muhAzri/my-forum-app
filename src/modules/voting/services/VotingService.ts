@@ -3,7 +3,13 @@ import type { IAuthService } from '../../auth/types/AuthTypes';
 import type { IVotingService, VoteType } from '../types/VotingTypes';
 
 export class VotingService implements IVotingService {
-  private readonly baseURL = 'https://forum-api.dicoding.dev/v1';
+  private readonly baseURL = import.meta.env['VITE_API_URL'];
+
+  constructor() {
+    if (!this.baseURL) {
+      throw new Error('VITE_API_URL environment variable is required');
+    }
+  }
 
   private getAuthService(): IAuthService {
     return container.resolve<IAuthService>('AuthService');

@@ -10,7 +10,13 @@ import type {
 } from '../types/ThreadTypes';
 
 export class ThreadsService implements IThreadsService {
-  private readonly baseURL = 'https://forum-api.dicoding.dev/v1';
+  private readonly baseURL = import.meta.env['VITE_API_URL'];
+
+  constructor() {
+    if (!this.baseURL) {
+      throw new Error('VITE_API_URL environment variable is required');
+    }
+  }
 
   private getAuthService(): IAuthService {
     return container.resolve<IAuthService>('AuthService');

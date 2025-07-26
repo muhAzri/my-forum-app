@@ -1,5 +1,4 @@
 import { Calendar, MessageSquare } from 'lucide-react';
-import React from 'react';
 
 import { cn } from '../../utils/utils';
 import Badge from '../atoms/Badge';

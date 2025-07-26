@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -15,15 +15,14 @@ import { ThreadCard } from './ThreadCard';
 
 export function ThreadList() {
   const dispatch = useDispatch<AppDispatch>();
-  const {
-    threads,
-    categories,
-    selectedCategory,
-    isLoading,
-    error,
-  } = useSelector((state: RootState) => state.threads);
-  const { token, user } = useSelector((state: RootState) => state.auth);
-  const { users } = useSelector((state: RootState) => state.users);
+  const threads = useSelector((state: RootState) => state.threads.threads || []);
+  const categories = useSelector((state: RootState) => state.threads.categories || []);
+  const selectedCategory = useSelector((state: RootState) => state.threads.selectedCategory);
+  const isLoading = useSelector((state: RootState) => state.threads.isLoading || false);
+  const error = useSelector((state: RootState) => state.threads.error);
+  const token = useSelector((state: RootState) => state.auth.token);
+  const user = useSelector((state: RootState) => state.auth.user);
+  const users = useSelector((state: RootState) => state.users.users || []);
 
   useEffect(() => {
     dispatch(fetchThreads());
@@ -31,13 +30,15 @@ export function ThreadList() {
   }, [dispatch]);
 
   const filteredThreads = useMemo(() => {
-    if (!selectedCategory) { return threads; }
+    if (!selectedCategory || !Array.isArray(threads) || threads.length === 0) {
+      return threads;
+    }
     return threads.filter((thread) => thread.category === selectedCategory);
   }, [threads, selectedCategory]);
 
-  const handleCategorySelect = (category: string | null) => {
+  const handleCategorySelect = useCallback((category: string | null) => {
     dispatch(setSelectedCategory(category));
-  };
+  }, [dispatch]);
 
   if (isLoading && threads.length === 0) {
     return (

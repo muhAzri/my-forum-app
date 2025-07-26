@@ -1,5 +1,4 @@
 import { MessageCircle, ThumbsUp, ThumbsDown } from 'lucide-react';
-import React from 'react';
 
 import type { Thread } from '../../types/forum';
 import { createExcerpt } from '../../utils/sanitize';
@@ -53,7 +52,7 @@ function ThreadCard({ thread, author, className }: ThreadCardProps) {
 
           <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
             <UserInfo
-              avatarUrl={author?.avatar}
+              avatarUrl={author?.avatar ?? ''}
               showDate={false}
               size="sm"
               username={author?.name ?? 'Unknown User'}
