@@ -1,6 +1,6 @@
 import { LogOut } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import type { AppDispatch, RootState } from '../../../core/store';
 import { logout } from '../../../core/store/slices/authSlice';
@@ -12,6 +12,7 @@ import Text from '../../../shared/components/atoms/Text';
 
 export function AuthButton() {
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
   const {
     user, token, isInitialized, isLoading,
   } = useSelector((state: RootState) => state.auth);
@@ -56,14 +57,21 @@ export function AuthButton() {
     );
   }
 
+  const isLoginPage = location.pathname === '/login';
+  const isRegisterPage = location.pathname === '/register';
+
   return (
     <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-      <Button asChild className="w-full sm:w-auto" size="sm" variant="ghost">
-        <Link to="/login">Sign In</Link>
-      </Button>
-      <Button asChild className="w-full sm:w-auto" size="sm">
-        <Link to="/register">Sign Up</Link>
-      </Button>
+      {!isLoginPage && (
+        <Button asChild className="w-full sm:w-auto" size="sm" variant="ghost">
+          <Link to="/login">Sign In</Link>
+        </Button>
+      )}
+      {!isLoginPage && !isRegisterPage && (
+        <Button asChild className="w-full sm:w-auto" size="sm">
+          <Link to="/register">Sign Up</Link>
+        </Button>
+      )}
     </div>
   );
 }
