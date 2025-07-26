@@ -1,3 +1,22 @@
+/**
+ * Skenario Test
+ *
+ * - authSlice reducer tests
+ *   - should return initial state
+ *   - loginUser async action
+ *     - should handle login pending state
+ *     - should handle login fulfilled state
+ *     - should handle login rejected state
+ *   - should handle logout action with complete state reset
+ *   - fetchCurrentUser with complex conditions
+ *     - should handle fetchCurrentUser fulfilled state
+ *     - should handle fetchCurrentUser rejected with token cleanup
+ *     - should handle no token available error differently
+ *   - should handle registerUser fulfilled state
+ *   - should handle clearError action
+ *   - should handle setInitialized action
+ */
+
 import type { AuthState } from '../../../../shared/types/forum';
 import authReducer, {
   loginUser,

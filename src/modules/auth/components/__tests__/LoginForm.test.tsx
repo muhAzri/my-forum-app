@@ -1,3 +1,22 @@
+/**
+ * Skenario Test
+ *
+ * - LoginForm Component Tests
+ *   - basic rendering
+ *     - should render all form elements
+ *     - should have empty initial form state
+ *   - user interaction
+ *     - should update form state when user types
+ *     - should show loading state
+ *   - form validation
+ *     - should display validation errors for empty fields
+ *     - should validate email format
+ *     - should display error from Redux state
+ *   - form states
+ *     - should disable form during loading
+ *     - should show sign up link
+ */
+
 import { configureStore } from '@reduxjs/toolkit';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

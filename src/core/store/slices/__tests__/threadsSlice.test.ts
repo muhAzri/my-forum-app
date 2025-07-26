@@ -1,3 +1,25 @@
+/**
+ * Skenario Test
+ *
+ * - threadsSlice reducer tests
+ *   - should return correct initial state with all properties
+ *   - fetchThreads with complex category extraction
+ *     - should handle fetchThreads fulfilled with category extraction
+ *     - should handle fetchThreads rejected with error message
+ *   - optimistic voting with complex state management
+ *     - should handle optimistic thread voting - switching from neutral to up
+ *     - should handle optimistic thread voting - switching from up to down
+ *     - should handle optimistic comment voting
+ *     - should handle rollback thread vote
+ *   - createThread with category management
+ *     - should handle createThread fulfilled with new category
+ *     - should handle createThread fulfilled with existing category
+ *   - complex state interactions
+ *     - should handle createComment fulfilled updating currentThread
+ *     - should handle multiple synchronous actions
+ *     - should handle fetchThreadDetail when currentThread already exists
+ */
+
 import type {
   ThreadsState, Thread, ThreadDetail, Comment,
 } from '../../../../shared/types/forum';

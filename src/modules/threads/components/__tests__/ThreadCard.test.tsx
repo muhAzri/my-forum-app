@@ -1,3 +1,23 @@
+/**
+ * Skenario Test
+ *
+ * - ThreadCard Component Tests
+ *   - basic rendering
+ *     - should render without crashing with required props
+ *     - should render without author
+ *   - content display
+ *     - should display thread title
+ *     - should display category
+ *     - should display vote counts
+ *   - author display
+ *     - should display author name when provided
+ *     - should display unknown user when no author
+ *     - should calculate vote score correctly
+ *   - edge cases
+ *     - should handle zero votes
+ *     - should handle negative vote score
+ */
+
 import { render } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';

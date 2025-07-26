@@ -1,3 +1,24 @@
+/**
+ * Skenario Test
+ *
+ * - Auth Thunk Functions Tests
+ *   - loginUser thunk with complex scenarios
+ *     - should handle successful login with proper token storage
+ *     - should handle login failure with proper error message
+ *     - should handle network error during login
+ *     - should handle malformed API response
+ *   - registerUser thunk with validation scenarios
+ *     - should handle successful registration
+ *     - should handle registration failure (duplicate email)
+ *   - fetchCurrentUser thunk with authentication states
+ *     - should successfully fetch user with valid token
+ *     - should handle fetchCurrentUser with no token
+ *     - should handle expired token (401 response) with cleanup
+ *   - integration tests with multiple thunks
+ *     - should handle login followed by fetchCurrentUser flow
+ *     - should handle error state persistence across failed thunks
+ */
+
 import { configureStore } from '@reduxjs/toolkit';
 
 import type { AuthState as _AuthState } from '../../../../shared/types/forum';
