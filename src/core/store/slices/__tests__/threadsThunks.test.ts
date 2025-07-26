@@ -1,3 +1,26 @@
+/**
+ * Skenario Test
+ *
+ * - Threads Thunk Functions Tests
+ *   - fetchThreads thunk with complex data scenarios
+ *     - should handle successful threads fetch with data transformation
+ *     - should handle empty threads response
+ *     - should handle fetchThreads network error
+ *     - should handle malformed API response
+ *   - createThread thunk with authentication dependencies
+ *     - should successfully create thread with authentication
+ *     - should fail to create thread without authentication
+ *     - should handle server validation errors
+ *   - voting thunks with complex state management
+ *     - should successfully vote on thread with authentication
+ *     - should handle vote switching scenarios
+ *     - should successfully vote on comment
+ *     - should fail voting without authentication
+ *   - integration tests with multiple related thunks
+ *     - should handle fetchThreadDetail followed by createComment
+ *     - should handle error propagation across multiple failed actions
+ */
+
 import { configureStore } from '@reduxjs/toolkit';
 
 import type { Thread, ThreadDetail, Comment } from '../../../../shared/types/forum';

@@ -1,3 +1,13 @@
+/**
+ * Skenario Test
+ *
+ * - Simple Test Suite
+ *   - should pass basic arithmetic test
+ *   - should pass string test
+ *   - should handle arrays
+ *   - should handle objects
+ */
+
 describe('Simple Test Suite', () => {
   test('should pass basic arithmetic test', () => {
     expect(2 + 2).toBe(4);
