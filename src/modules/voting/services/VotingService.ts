@@ -18,7 +18,12 @@ export class VotingService implements IVotingService {
   private getAuthHeaders() {
     const authService = this.getAuthService();
     const token = authService.getToken();
-    return token ? { Authorization: `Bearer ${token}` } : {};
+
+    if (!token) {
+      throw new Error('Missing authentication');
+    }
+
+    return { Authorization: `Bearer ${token}` };
   }
 
   async voteOnThread(threadId: string, voteType: VoteType): Promise<void> {
@@ -26,7 +31,10 @@ export class VotingService implements IVotingService {
 
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: this.getAuthHeaders(),
+      headers: {
+        'Content-Type': 'application/json',
+        ...this.getAuthHeaders(),
+      },
     });
 
     if (!response.ok) {
@@ -40,7 +48,10 @@ export class VotingService implements IVotingService {
 
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: this.getAuthHeaders(),
+      headers: {
+        'Content-Type': 'application/json',
+        ...this.getAuthHeaders(),
+      },
     });
 
     if (!response.ok) {
